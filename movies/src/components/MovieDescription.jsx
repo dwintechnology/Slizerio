@@ -1,4 +1,5 @@
 import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 
 
 const style1 = makeStyles({
@@ -40,7 +41,7 @@ const style1 = makeStyles({
     },
     footerIMG:{
         position:"absolute",
-        top:"760px",
+        top:"605px",
         right:"0",
         transform: `rotate(90deg)`,
         animation: `$example 400ms  linear 2s infinite alternate`,
@@ -67,14 +68,15 @@ const style1 = makeStyles({
           },
           "100%": {
             opacity: 0,
-            width:"800px"
+            // width:"800px"
           }
     }
 })
-function Separate({ title, sr, distr, date }){
+function MovieDescription({ title, sr, distr, date }){
     const a = style1()
     return (
         <div >
+            <Link to="/">HOME</Link>
             <div className={a.im}>
                
                 <div className={a.te}>
@@ -100,4 +102,4 @@ function Separate({ title, sr, distr, date }){
         </div>
     )
 }
-export default Separate
+export default MovieDescription
