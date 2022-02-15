@@ -1,7 +1,7 @@
 import { Button, Rating } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useParams } from 'react-router-dom';
-
+import constants from '../utils/constants';
 
 const style = makeStyles({
     parent: {
@@ -39,11 +39,10 @@ function MovieDescription({ obj }) {
             <div className={descriptionStyle.bigdiv}>
 
                 <div>
-                    <img className={descriptionStyle.moviesImg} src={}/>
+                    <img className={descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.results[id].poster_path}`}/>
                 </div>
                 <div >
                     <h2>{obj.results[id].title}</h2>
-                    <h2>SPIDER MAN</h2>
                     <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
                     <div className={descriptionStyle.section1}>
                         <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
