@@ -4,48 +4,41 @@ import { Link } from "react-router-dom";
 
 function Home({ setObj }) {
     const [data, setData] = useState();
-    const [itemsTitle, setItemsTitle] = useState();
-    const [page, setPage] = useState(2)
+    const [page, setPage] = useState(1)
 
-    function loadMovie() {
+    function LoadMovie() {
         setPage(page + 1)
-        fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}c&language=en-US&page=${page}`)
-            .then((d) => {
-                return d.json()
-            })
-            .then((dataJson) => {
-                let dataCopy = JSON.parse(JSON.stringify(data))
-                dataJson.results.forEach(element => {
-                    dataCopy.results.push(element)
-                });
-                setData(dataCopy)
-            })
+        getMovies(page + 1)
     }
 
+    function LoadPreviousMovies() {
+        setPage(page - 1)
+        getMovies(page - 1)
+    }
 
-    useEffect(() => {
-        fetch('https://api.themoviedb.org/3/movie/popular?api_key=e81b5d12d52c0de91f235d90e155683c&language=en-US&page=1')
+    function getMovies(page) {
+        fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}c&language=en-US&page=${page}`)
             .then((a) => { return a.json() })
             .then((b) => { setData(b) })
-    }, [])
+    }
+
     useEffect(() => {
-        setItemsTitle(items)
-        console.log(data)
-    }, [data])
+        getMovies(page)
+    }, [])
+
 
 
     let items = data?.results.map((item, index) => {
         return (
             <div key={index}>
-                <Link onClick={
-                    () => {
+                <Link onClick={() => {
+                    setObj(data)
 
-                        // setTitle(item.title)
-                        // setDate(item.release_date)
-                        // setOwer(item.overview)
-                        setObj(data)
-                    }
-                } to={`/film_About/${index}`}>{item.title}</Link>
+                }
+                } to={`/film_About/${index}`}>
+                    {item.title}
+                    <img src={`${constants.SMALL_IMG_PATH}${item.poster_path}`} alt="#" />
+                </Link>
             </div>
         )
     })
@@ -53,10 +46,9 @@ function Home({ setObj }) {
 
     return (
         <div>
-            {itemsTitle}
-
-            {/* <Button setData={setData} data={data}/> */}
-            <button onClick={loadMovie}>Learn More</button>
+            {items}
+            <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>
+            <button onClick={LoadMovie}>{`Page ${page + 1}`}</button>
         </div>
     )
 }
