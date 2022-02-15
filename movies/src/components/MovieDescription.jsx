@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 const style1 = makeStyles({
@@ -72,8 +72,10 @@ const style1 = makeStyles({
           }
     }
 })
-function MovieDescription({ title, sr, distr, date }){
+function MovieDescription({ obj }){
     const a = style1()
+    let { id } = useParams();
+    
     return (
         <div >
             <Link to="/">HOME</Link>
@@ -81,19 +83,19 @@ function MovieDescription({ title, sr, distr, date }){
                
                 <div className={a.te}>
                     
-                    <h2 className={a.text} >{title}</h2>
+                    <h2 className={a.text} >{obj.results[id].title}</h2>
                     <div className={a.distr} >
-                        <img src={sr} />
+                        {/* <img src={} /> */}
                         <p>
-                            {distr}
+                            {obj.results[id].overview}
                         </p>
                     </div>
-                    <h2 className={a.text}>DATE: {date}</h2>
+                    <h2 className={a.text}>DATE: {obj.results[id].release_date}</h2>
                 </div>
             </div>
             <div className={a.footer}>
             
-                <h1 className={a.footerTEXT}>{title}</h1>
+                <h1 className={a.footerTEXT}>{obj.results[id].title}</h1>
                 <div>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/tCuRbIInrOo" title="YouTube video player"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>

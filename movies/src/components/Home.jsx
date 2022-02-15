@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import constants from "../utils/constants";
 import { Link } from "react-router-dom";
 
-function Home({setTitle, setDate, setOwer}) {
+function Home({ setObj }) {
     const [data, setData] = useState();
     const [itemsTitle, setItemsTitle] = useState();
     const [page, setPage] = useState(2)
@@ -10,16 +10,16 @@ function Home({setTitle, setDate, setOwer}) {
     function loadMovie() {
         setPage(page + 1)
         fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}c&language=en-US&page=${page}`)
-        .then((d)=>{
-            return d.json()
-        })
-        .then((dataJson)=>{
+            .then((d) => {
+                return d.json()
+            })
+            .then((dataJson) => {
                 let dataCopy = JSON.parse(JSON.stringify(data))
                 dataJson.results.forEach(element => {
-                dataCopy.results.push(element)
-            });
-            setData(dataCopy)
-        })
+                    dataCopy.results.push(element)
+                });
+                setData(dataCopy)
+            })
     }
 
 
@@ -29,33 +29,32 @@ function Home({setTitle, setDate, setOwer}) {
             .then((b) => { setData(b) })
     }, [])
     useEffect(() => {
-        if (data !== undefined) {
-            console.log(data)
-            let items = data.results.map((item, index) => {
-                return (
-                    <div key={index}>
-                        {/* <h1>{item.title}</h1> */}
-                        <Link onClick={
-                            ()=>{
-                                
-                                setTitle(item.title)
-                                setDate (item.release_date)
-                                setOwer (item.overview)
-                            }
-                        } to="/film_About">{item.title}</Link>
-                    </div>
-                )
-            })
-            setItemsTitle(items)
-        }
+        setItemsTitle(items)
+        console.log(data)
     }, [data])
 
+
+    let items = data?.results.map((item, index) => {
+        return (
+            <div key={index}>
+                <Link onClick={
+                    () => {
+
+                        // setTitle(item.title)
+                        // setDate(item.release_date)
+                        // setOwer(item.overview)
+                        setObj(data)
+                    }
+                } to={`/film_About/${index}`}>{item.title}</Link>
+            </div>
+        )
+    })
 
 
     return (
         <div>
             {itemsTitle}
-            
+
             {/* <Button setData={setData} data={data}/> */}
             <button onClick={loadMovie}>Learn More</button>
         </div>
