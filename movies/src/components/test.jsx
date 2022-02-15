@@ -1,19 +1,32 @@
 import { useEffect, useState } from "react"
+import Button from "./buttonLearnMore";
+import constants from "../utils/constants";
 
 function Test() {
     const [data, setData] = useState();
     const [itemsTitle, setItemsTitle] = useState();
-    let buttonsArr = [];
+    const [page, setPage] = useState(2)
+
+    function loadMovie() {
+        setPage(page + 1)
+        fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}c&language=en-US&page=${page}`)
+        .then((d)=>{
+            return d.json()
+        })
+        .then((dataJson)=>{
+            let dataCopy = JSON.parse(JSON.stringify(data))
+            dataJson.results.forEach(element => {
+                dataCopy.results.push(element)
+            });
+            setData(dataCopy)
+        })
+    }
 
 
     useEffect(() => {
-        async function foo() {
-            fetch('https://api.themoviedb.org/3/movie/popular?api_key=e81b5d12d52c0de91f235d90e155683c&language=en-US&page=1')
-                .then((a) => { return a.json() })
-                .then((b) => { setData(b) })
-        }
-        foo()
-
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=e81b5d12d52c0de91f235d90e155683c&language=en-US&page=1')
+            .then((a) => { return a.json() })
+            .then((b) => { setData(b) })
     }, [])
     useEffect(() => {
         if (data !== undefined) {
@@ -29,41 +42,13 @@ function Test() {
         }
     }, [data])
 
-    // bottom buttons 
-    function crateButtons() {
-        let buttonsArrLength = buttonsArr.length;
-        buttonsArr.length = buttonsArrLength + 10;
-        buttonsArr = buttonsArr.fill(1)
-        buttonsArr = buttonsArr.map((el, index) => { return el + index })
-    }
-    crateButtons()
 
-    let DrawButtons = buttonsArr.map((el, index) => {
-        return (
-            <div key={index} onClick={(e) => {
-                function foo() {
-                    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e81b5d12d52c0de91f235d90e155683c&language=en-US&page=${e.target.textContent}`)
-                        .then((a) => { return a.json() })
-                        .then((b) => { 
-                            let results = b.results
-                            let dataCopy = JSON.parse(JSON.stringify(data))
-                            results.forEach(element => {
-                                dataCopy.results.push(element)
-                            });
-                            console.log(dataCopy);
-                            setData(dataCopy)
-                        })
-                }
-                foo()
-            }}>{el}</div>
-        )
-    })
-    // bottom buttons 
 
     return (
         <div>
             {itemsTitle}
-            {DrawButtons}
+            {/* <Button setData={setData} data={data}/> */}
+            <button onClick={loadMovie}>Learn More</button>
         </div>
     )
 }
