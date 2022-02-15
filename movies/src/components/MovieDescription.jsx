@@ -1,4 +1,4 @@
-import { Button, Rating } from '@mui/material';
+import { Button, Link, Rating } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useParams } from 'react-router-dom';
 import constants from '../utils/constants';
@@ -10,7 +10,7 @@ const style = makeStyles({
         marginTop: "50px"
     },
     moviesImg: {
-        width: "500px",
+        width: "400px",
         height: "600px",
         borderRadius: "20px"
     },
@@ -25,10 +25,14 @@ const style = makeStyles({
         marginLeft: "240px"
     },
     section1Language: {
-        marginLeft: "180px"
+        // marginLeft: "180px"
     },
     parentTitle: {
         marginLeft: "90px"
+    },
+    bigDIV2:{
+        width:"700px",
+        padding:"50px"
     }
 })
 function MovieDescription({ obj }) {
@@ -41,7 +45,7 @@ function MovieDescription({ obj }) {
                 <div>
                     <img className={descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.results[id].poster_path}`}/>
                 </div>
-                <div >
+                <div className={descriptionStyle.bigDIV2}>
                     <h2>{obj.results[id].title}</h2>
                     <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
                     <div className={descriptionStyle.section1}>
@@ -52,7 +56,7 @@ function MovieDescription({ obj }) {
                     <h3>
                         THE SYNOPSIS
                     </h3>
-                    <p>
+                    <p style={{padding:"0px 50px 0px 260px"}}>
                         {obj.results[id].overview}
                     </p>
                     <h2>
@@ -63,11 +67,12 @@ function MovieDescription({ obj }) {
                             Website
                         </Button>
                         <Button sx={{borderRadius:"50px", backgroundColor:"transparent", color:"black", marginLeft:"20px"}} variant="contained" color="success">
-                            Website
+                            IMBD
                         </Button>
                         <Button sx={{borderRadius:"50px", backgroundColor:"transparent", color:"black", marginLeft:"20px"}} variant="contained" color="success">
-                            Website
+                            TRAILER
                         </Button>
+                        
                     </div>
                 </div>
             </div>
