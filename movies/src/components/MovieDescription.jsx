@@ -1,107 +1,80 @@
+import { Button, Rating } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
-const style1 = makeStyles({
-    im: {
-        backgroundImage: `url('https://www.nawpic.com/media/2020/harry-potter-nawpic-13.jpg')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
-        padding: "340px 0px 10px 0px",
+const style = makeStyles({
+    parent: {
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginTop: "50px"
     },
-    te: {
-        backgroundColor: "black",
+    moviesImg: {
         width: "500px",
-        height: 'auto',
-        color: "white",
-
+        height: "600px",
+        borderRadius: "20px"
     },
-    text: {
-        color: "white",
-        textAlign: "center",
-    },
-    distr: {
+    bigdiv: {
         display: "flex",
         justifyContent: "space-between"
     },
-    footer: {
-        padding: "250px 0px 350px 0px",
+    section1: {
         display: "flex",
-        justifyContent: "center",
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
-        backgroundImage: `url('http://www.xaviermartinvfx.com/wp-content/uploads/2015/01/Lightning_detail.png')`,
+        justifyContent: "space-around",
+        alignItems: "center",
+        marginLeft: "240px"
     },
-    footerTEXT: {
-        fontSize: "100px",
-        color: "white",
-        display:"block"
+    section1Language: {
+        marginLeft: "180px"
     },
-    footerIMG:{
-        position:"absolute",
-        top:"605px",
-        right:"0",
-        transform: `rotate(90deg)`,
-        animation: `$example 400ms  linear 2s infinite alternate`,
-        zIndex:"0.1"
-
-    },
-    '@keyframes example':{
-        "0%": {
-            opacity: 1,
-            // width:"500px"
-           
-          },
-          "20%":{
-            opacity: 0.8,
-          },
-          "40%":{
-            opacity: 0.6,
-          },
-          "60%":{
-            opacity: 0.4,
-          },
-          "80%":{
-            opacity: 0.2,
-          },
-          "100%": {
-            opacity: 0,
-            // width:"800px"
-          }
+    parentTitle: {
+        marginLeft: "90px"
     }
 })
-function MovieDescription({ obj }){
-    const a = style1()
+function MovieDescription({ obj }) {
+    const descriptionStyle = style()
     let { id } = useParams();
-    
     return (
-        <div >
-            <Link to="/">HOME</Link>
-            <div className={a.im}>
-               
-                <div className={a.te}>
-                    
-                    <h2 className={a.text} >{obj.results[id].title}</h2>
-                    <div className={a.distr} >
-                        {/* <img src={} /> */}
-                        <p>
-                            {obj.results[id].overview}
-                        </p>
-                    </div>
-                    <h2 className={a.text}>DATE: {obj.results[id].release_date}</h2>
-                </div>
-            </div>
-            <div className={a.footer}>
-            
-                <h1 className={a.footerTEXT}>{obj.results[id].title}</h1>
+        <div className={descriptionStyle.parent}>
+            <div className={descriptionStyle.bigdiv}>
+
                 <div>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/tCuRbIInrOo" title="YouTube video player"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <img className={descriptionStyle.moviesImg} src={}/>
+                </div>
+                <div >
+                    <h2>{obj.results[id].title}</h2>
+                    <h2>SPIDER MAN</h2>
+                    <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
+                    <div className={descriptionStyle.section1}>
+                        <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
+                        <h2 className={descriptionStyle.section1Language}><span>{obj.results[id].original_language}</span>/<span>{obj.results[id].release_date}</span></h2>
+                    </div>
+                    <h2>THE GENRES</h2>
+                    <h3>
+                        THE SYNOPSIS
+                    </h3>
+                    <p>
+                        {obj.results[id].overview}
+                    </p>
+                    <h2>
+                        THE CAST
+                    </h2>
+                    <div>
+                        <Button sx={{borderRadius:"50px", backgroundColor:"transparent", color:"black", marginLeft:"180px"}} variant="contained" color="success">
+                            Website
+                        </Button>
+                        <Button sx={{borderRadius:"50px", backgroundColor:"transparent", color:"black", marginLeft:"20px"}} variant="contained" color="success">
+                            Website
+                        </Button>
+                        <Button sx={{borderRadius:"50px", backgroundColor:"transparent", color:"black", marginLeft:"20px"}} variant="contained" color="success">
+                            Website
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <img className={a.footerIMG} src="https://www.pngkey.com/png/full/25-250270_lightning-strike-png-photo-lightning.png"/>
         </div>
+
+
     )
 }
 export default MovieDescription
