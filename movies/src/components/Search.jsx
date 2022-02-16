@@ -61,11 +61,14 @@ function Search({ setData }) {
         <form type="submit">
             <button className={searchStyle.button} onClick={(event) => {
                 event.preventDefault()
-                setClickCount(clickCount + 1)
                 if (clickCount < 1) {
+                    setClickCount(clickCount + 1)
                     inputRef.current.className = searchStyle.inputEffect
-                }else{
+                }else if(inputValue){
                     SearchMovies()
+                    inputRef.current.className = ''
+                    inputRef.current.value = ''
+                    setClickCount(clickCount - 1)
                 }
             }}>
                 <SearchIcon sx={{ color: '#fff' }} />
