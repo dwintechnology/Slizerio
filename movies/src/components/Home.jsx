@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import constants from "../utils/constants";
 import { Link } from "react-router-dom";
 
@@ -25,23 +25,19 @@ function Home({ setObj }) {
         getMovies(page)
     }, [])
 
-
-
-    let items = data?.results.map((item, index) => {
+    let items = data?.results.map((movie, index) => {
         return (
             <div key={index}>
                 <Link onClick={() => {
                     setObj(data)
-
                 }
                 } to={`/film_About/${index}`}>
-                    {item.title}
-                    <img src={`${constants.SMALL_IMG_PATH}${item.poster_path}`} alt="#" />
+                    {movie.title}
+                    <img src={`${constants.SMALL_IMG_PATH}${movie.poster_path}`} alt="#" />
                 </Link>
             </div>
         )
     })
-
 
     return (
         <div>
