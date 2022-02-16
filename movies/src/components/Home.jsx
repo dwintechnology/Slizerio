@@ -29,6 +29,13 @@ const useStyle = makeStyles({
         alignItems: 'center',
         boxShadow: 'unset !important',
         margin: '50px'
+    },
+
+    link: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
     }
 
 }, {
@@ -65,8 +72,8 @@ function Home({ setObj }) {
     let items = data?.results.map((movie, index) => {
         return (
             <Grid key={index} item xs={3}>
-                <Card sx={{ maxWidth: 334, maxHeight: 418 }} className={cardStyle.cardMainStyle}>
-                    <Link onClick={() => { setObj(data) }
+                <Card sx={{height: 421}} className={cardStyle.cardMainStyle}>
+                    <Link  className={cardStyle.link} onClick={() => { setObj(data) }
                     } to={`/film_About/${index}`}>
                         <CardMedia
                             className={cardStyle.cardStyle}
