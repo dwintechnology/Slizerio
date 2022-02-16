@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 function Home({ setObj }) {
     const [data, setData] = useState();
     const [page, setPage] = useState(1)
-
     function LoadMovie() {
         setPage(page + 1)
         getMovies(page + 1)
