@@ -38,8 +38,9 @@ const useStyle = makeStyles({
 
 function Home({ setObj }) {
     const [data, setData] = useState();
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(1);
     const cardStyle = useStyle()
+
 
     function LoadMovie() {
         setPage(page + 1)
