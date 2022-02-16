@@ -52,7 +52,6 @@ function MovieDescription({ obj }) {
     let { id } = useParams();
     return (
         <div className={descriptionStyle.parent}>
-            <Link href="/">Link</Link>
             <div className={descriptionStyle.bigdiv}>
                 <div>
                     <img className={descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.results[id].poster_path}`}/>
