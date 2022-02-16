@@ -26,8 +26,6 @@ function Home({ setObj }) {
         getMovies(page)
     }, [])
 
-
-
     let items = data?.results.map((movie, index) => {
         return (
             <div key={index}>
@@ -41,7 +39,6 @@ function Home({ setObj }) {
             </div>
         )
     })
-
 
     return (
         <div>

@@ -1,5 +1,6 @@
-import { Button, Link, Rating } from '@mui/material';
+import { Button,  Rating } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import Link from '@mui/material/Link';
 import { useParams } from 'react-router-dom';
 import constants from '../utils/constants';
 
@@ -40,6 +41,7 @@ function MovieDescription({ obj }) {
     let { id } = useParams();
     return (
         <div className={descriptionStyle.parent}>
+            <Link href="/">Link</Link>
             <div className={descriptionStyle.bigdiv}>
 
                 <div>
