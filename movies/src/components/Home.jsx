@@ -7,6 +7,7 @@ import { makeStyles } from '@mui/styles';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Search from "./Search";
 
 
 const useStyle = makeStyles({
@@ -88,10 +89,11 @@ function Home({ setObj }) {
 
     return (
         <div>
+            <Search setData={setData}/>
             <Grid container columnSpacing={5}>
                 {items}
             </Grid>
-            <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>
+            {(page > 1) && <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>}
             <button onClick={LoadMovie}>{`Page ${page + 1}`}</button>
         </div>
     )
