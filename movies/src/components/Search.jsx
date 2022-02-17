@@ -6,19 +6,20 @@ import SearchIcon from '@mui/icons-material/Search';
 const useStyle = makeStyles({
 
     button: {
-        margin: '0',
+        top: '1px',
         width: '37px',
         border: 'none',
-        height: '37px',
-        padding: '0',
-        borderRadius: '50%',
-        backgroundColor: '#263238',
-        paddingTop: '3px',
         cursor: 'pointer',
-        position: 'absolute',
+        height: '37px',
+        margin: '0',
+        padding: '0',
         zIndex: '5',
-        top: '1px',
         marginLeft: '1px',
+        paddingTop: '3px',
+        borderRadius: '50%',
+        right: '0',
+        position: 'absolute',
+        backgroundColor: '#263238',
     },
 
     "@keyframes InputEffectExit": {
@@ -58,7 +59,7 @@ function Search({ setData }) {
     }
 
     return (
-        <form type="submit">
+        <form style={{width: '59px', position: 'relative'}} type="submit">
             <button className={searchStyle.button} onClick={(event) => {
                 event.preventDefault()
                 if (clickCount < 1) {
@@ -73,7 +74,7 @@ function Search({ setData }) {
             }}>
                 <SearchIcon sx={{ color: '#fff' }} />
             </button>
-            <input style={{ height: '37px', borderRadius: '37px', border: 'none', backgroundColor: '#263238', paddingLeft: '39px', color: '#fff', position: 'absolute', zIndex: '4', width: '0px' }} ref={inputRef} className={searchStyle.Input} type="text" onChange={(event) => { setInputValue(event.target.value) }} />
+            <input style={{ height: '37px', borderRadius: '37px', border: 'none', backgroundColor: 'rgb(38, 50, 56)', paddingRight: "39px", paddingLeft: '20px', color: 'rgb(255, 255, 255)', position: 'absolute', zIndex: '4', width: '0px', position: 'absolute', right: '0' }} ref={inputRef} className={searchStyle.Input} type="text" onChange={(event) => { setInputValue(event.target.value) }} />
 
         </form>
 
