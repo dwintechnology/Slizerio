@@ -14,7 +14,8 @@ const style = makeStyles({
         width: "500px",
         height: "700px",
         borderRadius: "0.8rem",
-        boxShadow: "0rem 2rem 5rem #00000040"
+        boxShadow: "0rem 2rem 5rem #00000040",
+        objectFit: 'cover',
     },
     bigdiv: {
         display: "flex",
