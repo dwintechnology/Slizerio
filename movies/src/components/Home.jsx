@@ -101,7 +101,7 @@ function Home({ setObj, path = constants.PAGES.popular.url }) {
     return (
         <div>
             <Search setData={setData} />
-            <Grid container columnSpacing={1}>
+            <Grid container  columns={{ xs: 1, sm: 6, md: 15 }} columnSpacing={1} spacing={0.5}>
                 {items}
             </Grid>
             {(page > 1) && <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>}
