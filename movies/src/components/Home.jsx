@@ -41,6 +41,7 @@ function Home({ setObj }) {
     const [data, setData] = useState();
     const [page, setPage] = useState(1);
     const cardStyle = useStyle()
+    console.log(data)
 
 
     function LoadMovie() {
@@ -54,7 +55,7 @@ function Home({ setObj }) {
     }
 
     function getMovies(page) {
-        fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}c&language=en-US&page=${page}`)
+        fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}&language=en-US&page=${page}`)
             .then((a) => { return a.json() })
             .then((b) => { setData(b) })
     }
