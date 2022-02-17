@@ -4,6 +4,7 @@ import Home from './components/Home';
 import { Route, Routes, Link } from "react-router-dom";
 import MovieDescription from './components/MovieDescription';
 import { useEffect, useState } from "react"
+import SiteBar from './components/SiteBar';
 
 function App() {
   // const [title, setTitle] = useState()
@@ -13,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home setObj={setObj}/>} />
+        <Route path="/" element={<SiteBar setObj={setObj}/>} />
         <Route path="/film_About/:id" element={<MovieDescription obj={obj}/>} />
       </Routes>
     </div>
