@@ -20,7 +20,8 @@ const useStyle = makeStyles({
     cardContent: {
         '&.MuiCardContent-root': {
             width: 180,
-            textDecoration: 'none'
+            textDecoration: 'none',
+            textAlign: 'center',
         },
     },
     cardHover: {

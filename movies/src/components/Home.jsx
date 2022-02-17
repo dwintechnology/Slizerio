@@ -8,6 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import MoviesCard from "./MoviesCard";
+import Search from "./Search";
+
 const useStyle = makeStyles({
     cardStyle: {
         '&.MuiCardMedia-root': {
@@ -55,6 +57,7 @@ function Home({ setObj }) {
     const [data, setData] = useState();
     const [page, setPage] = useState(1);
     const cardStyle = useStyle()
+    
     function LoadMovie() {
         setPage(page + 1)
         getMovies(page + 1)
@@ -64,7 +67,7 @@ function Home({ setObj }) {
         getMovies(page - 1)
     }
     function getMovies(page) {
-        fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}c&language=en-US&page=${page}`)
+        fetch(`${constants.API_PATH}/movie/popular?api_key=${constants.API_KEY}&language=en-US&page=${page}`)
             .then((a) => { return a.json() })
             .then((b) => { setData(b) })
     }
@@ -91,10 +94,11 @@ function Home({ setObj }) {
     })
     return (
         <div>
+            <Search setData={setData}/>
             <Grid container columnSpacing={1}>
                 {items}
             </Grid>
-            <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>
+            {(page > 1) && <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>}
             <button onClick={LoadMovie}>{`Page ${page + 1}`}</button>
         </div>
     )
