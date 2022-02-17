@@ -25,7 +25,8 @@ const useStyle = makeStyles({
         flexDirection: 'column',
         alignItems: 'center',
         boxShadow: 'unset !important',
-        margin: '50px',
+        margin: '30px',
+        padding: '20px',
         '&:hover': {
             transform: 'scale(1.03)'
         },
@@ -34,12 +35,18 @@ const useStyle = makeStyles({
         '&:hover': {
             backgroundColor: '#37474f',
             transition: 'all 300ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s',
+            boxShadow: '0px 0px 20px 0px #000000',
+            borderRadius: '20px',
+            '& .MuiCardMedia-root':{
+                boxShadow: 'none',
+            }
         },
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         //transition: 'all 500ms',
+
     }
 }, {
     name: 'Home'

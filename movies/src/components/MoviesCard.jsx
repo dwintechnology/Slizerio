@@ -12,7 +12,7 @@ const useStyle = makeStyles({
             height: "335px",
             objectFit: 'cover',
             borderRadius: '0.8rem',
-            boxShadow: '0rem 2rem 5rem #00000033',
+            boxShadow: '0px 0px 20px 0px #000000',
             transition: 'all 300ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s',
             backgroundColor: 'transparent',
         }
@@ -20,6 +20,7 @@ const useStyle = makeStyles({
     cardContent: {
         '&.MuiCardContent-root': {
             width: 180,
+            textDecoration: 'none'
         },
     },
     cardHover: {
