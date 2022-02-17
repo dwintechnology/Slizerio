@@ -1,15 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home';
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import MovieDescription from './components/MovieDescription';
-import { useEffect, useState } from "react"
+import { useState } from "react";
+import constants from './utils/constants';
 
 function App() {
-  // const [title, setTitle] = useState()
-  // const [date, setDate] = useState()
-  // const [ower, setOwer] = useState()
   const [obj, setObj] = useState()
+  
   return (
     <div className="App">
       <Routes>
