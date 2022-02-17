@@ -8,9 +8,6 @@ import Rating from '@mui/material/Rating';
 const useStyle = makeStyles({
     cardImageStyle: {
         '&.MuiCardMedia-root': {
-            '&:hover': {
-                transform: 'scale(1.03)'
-            },
             width: "220px",
             height: "335px",
             objectFit: 'cover',
@@ -22,15 +19,21 @@ const useStyle = makeStyles({
     },
     cardContent: {
         '&.MuiCardContent-root': {
-            width: 180
-        }
+            width: 180,
+        },
     },
     cardHover: {
-        // transition: 'all 300ms',
+        transition: 'all 300ms',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: 220 * 1.03
+        width: 220 * 1.03,
+        '&:hover': {
+            transform: 'scale(1.03)',
+            '& .MuiTypography-root': {
+                color: 'white'
+            }
+        }
     },
 }, {
     name: 'MoviesCard'
