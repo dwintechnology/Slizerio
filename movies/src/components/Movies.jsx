@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import constants from "../utils/constants";
 import { Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import { makeStyles } from '@mui/styles';
@@ -36,15 +35,17 @@ const useStyle = makeStyles({
             },
             '& .MuiTypography-root': {
                 color: 'white',
-            
+
             },
             '& .Home-link-3': {
                 backgroundColor: '#38474f',
                 boxShadow: '0px 0px 20px 0px #000000',
                 borderRadius: '12.8px',
                 width: '250px',
-
             },
+            '& .MuiRating-sizeMedium': {
+                color: '#b0bec5',
+            }
         },
     },
     link: {
@@ -59,7 +60,8 @@ const useStyle = makeStyles({
 }, {
     name: 'Home'
 })
-function Movies({ setObj, path}) {
+
+function Movies({ setObj, path }) {
     const [data, setData] = useState();
     const [page, setPage] = useState(1);
     const cardStyle = useStyle()
@@ -69,18 +71,22 @@ function Movies({ setObj, path}) {
         setPage(page + 1)
         getMovies(page + 1)
     }
+
     function LoadPreviousMovies() {
         setPage(page - 1)
         getMovies(page - 1)
     }
+
     function getMovies(page) {
         fetch(`${path}${page}`)
             .then((a) => { return a.json() })
             .then((b) => { setData(b) })
     }
+
     useEffect(() => {
         getMovies(page)
     }, [])
+
     let items = data?.results.map((movie, index) => {
         return (
             <Grid key={index} item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -102,7 +108,7 @@ function Movies({ setObj, path}) {
     return (
         <div>
             <Search setData={setData} />
-            <Grid container  columns={{ xs: 1, sm: 6, md: 15 }} columnSpacing={1} spacing={0.5}>
+            <Grid container columns={{ xs: 1, sm: 6, md: 15 }} columnSpacing={1} spacing={0.5}>
                 {items}
             </Grid>
             {(page > 1) && <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>}
@@ -110,4 +116,5 @@ function Movies({ setObj, path}) {
         </div>
     )
 }
+
 export default Movies

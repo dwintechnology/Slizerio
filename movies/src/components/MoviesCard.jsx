@@ -40,6 +40,7 @@ const useStyle = makeStyles({
 
 function MoviesCard({ movie }) {
     const cardStyle = useStyle();
+    console.log(movie)
     return (
         <div className={cardStyle.cardHover}>
             <CardMedia
@@ -53,8 +54,14 @@ function MoviesCard({ movie }) {
                     {movie.title}
                 </Typography>
             </CardContent>
-            <Rating name="no-value" value={null} style={{ marginBottom: 16 }} />
+            <Rating
+                sx={{ marginRight: "5px", color: "#37474f", mb: "16px" }}
+                name="simple-controlled" precision={0.5}
+                value={(movie.vote_average * 5) / 9}
+                readOnly
+            />
         </div>
     )
 }
+
 export default MoviesCard;
