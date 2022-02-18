@@ -11,13 +11,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const style = makeStyles({
     parent: {
         display: "flex",
-        justifyContent: "center",
         marginTop: "50px"
     },
     moviesImg: {
-        width: "500px",
-        height: "700px",
-        borderRadius: "0.8rem",
+        width: "325px",
+        height: "474px",
+        borderRadius: "12.8px",
         boxShadow: "0rem 2rem 5rem #00000040",
         objectFit: 'cover',
     },
@@ -34,15 +33,15 @@ const style = makeStyles({
         textTransform: "uppercase",
         lineHeight: 1.5,
         color: 'rgb(55 71 79)',
-        fontSize: "1.7rem",
+        fontSize: "15px",
         fontWeight: 700,
     },
     bigDIV2: {
-        width: "700px",
-        marginLeft:"6rem"
+        width: "518px",
+        marginLeft:"50px"
     },
     movieTITLE: {
-        fontSize: "2.5rem",
+        fontSize: "31px",
         fontWeight: 200,
         lineHeight: 1.2,
         letterSpacing: "-0.5px",
@@ -53,8 +52,8 @@ const style = makeStyles({
         color: "#243036",
     fontWeight: 700,
     textTransform: "uppercase",
-    marginBottom: "1rem",
-    fontSize: "1.4rem"
+    marginBottom: "40px",
+    fontSize: "11px"
     },
     parentICON: {
     width: "20px",
@@ -65,14 +64,14 @@ const style = makeStyles({
         lineHeight: 1,
         textTransform: "uppercase",
         color: "#aebac1",
-        fontSize: "1.3rem"
+        fontSize: "11px"
     },
     parentPARAGRAPH:{
-        fontSize: "1.4rem",
+        fontSize: "11px",
     lineHeight: 1.8,
     color: "#444444",
-    fontWeight: 500,
-    marginBottom: "3rem",
+    fontWeight: 400,
+    marginBottom: "48px",
     },
     buttonsDIV:{
         display:"flex",
@@ -153,20 +152,20 @@ function MovieDescription({ obj }) {
                     </div>
                     <div className={descriptionStyle.buttonsDIV}>
                        <div>
-                       <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black",  border: "1px solid #242f34" }} variant="contained" color="success">
+                       <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black",  border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
                             Website
                             < LinkIcon/>
                         </Button>
-                        <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px",  border: "1px solid #242f34" }} variant="contained" color="success">
+                        <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px",  border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
                             IMBD
                             <LocalMoviesIcon/>
                        </Button>
-                        <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34" }} variant="contained" color="success">
+                        <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
                             TRAILER
                             <PlayArrowIcon/>
                         </Button>
                        </div>
-                        <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px",     border: "1px solid #242f34" }} variant="contained" color="success">
+                        <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px",     border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
                            <Link sx={{ textDecoration: "none", color: "white", alignItems:"center", display:"flex" }} href="/">
                                <ArrowBackIcon/>
                                Home

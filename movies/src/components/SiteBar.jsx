@@ -8,7 +8,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Home from './Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
@@ -23,11 +22,11 @@ const style = makeStyles({
             }
         },
         positionNone:{
-            '&.MuiDrawer-paper ':{
-                position:"relative",
-                backgroundColor:"blue"
-            }
-        }
+            '&::-webkit-scrollbar':{
+              display:"none"
+            },
+            padding:"20px"
+          },
 })
 export default function SiteBar({setObj}) {
     const styles = style()
@@ -48,7 +47,7 @@ export default function SiteBar({setObj}) {
         >
           <Toolbar />
           <Box className={styles.positionNone} sx={{ overflow: 'auto'}}>
-            <List>
+            <List  >
             <div style={{display:"flex", justifyContent:"center"}}>
             <img style={{width:"100px", height:"100px"}} src="	https://movies.fidalgo.dev/static/media/logo.bcc287ea.svg"/>
             </div>
@@ -76,9 +75,6 @@ export default function SiteBar({setObj}) {
             </List>
           </Box>
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <Home setObj={setObj}/>
-        </Box>
       </Box>
     );
   }
