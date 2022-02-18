@@ -37,7 +37,8 @@ const useStyle = makeStyles({
                 borderRadius: '0.8rem 0.8rem 0 0',
             },
             '& .MuiTypography-root': {
-                color: 'white'
+                color: 'white',
+            
             },
             '& .Home-link-3': {
                 backgroundColor: '#38474f',
@@ -53,6 +54,9 @@ const useStyle = makeStyles({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        "&:link": {
+            textDecoration: "none !important"
+        }
     }
 }, {
     name: 'Home'
