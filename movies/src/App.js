@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home setObj={setObj}/>} />
+        <Route path="/" element={<Home setObj={setObj} path={constants.PAGES.popular.url}/>} />
         <Route path="/film_About/:id" element={<MovieDescription obj={obj}/>} />
       </Routes>
     </div>
