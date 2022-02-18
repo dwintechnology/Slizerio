@@ -61,7 +61,7 @@ const useStyle = makeStyles({
 }, {
     name: 'Home'
 })
-function Home({ setObj, path = constants.PAGES.popular.url }) {
+function Movies({ setObj, path}) {
     const [data, setData] = useState();
     const [page, setPage] = useState(1);
     const cardStyle = useStyle()
@@ -113,4 +113,4 @@ function Home({ setObj, path = constants.PAGES.popular.url }) {
         </div>
     )
 }
-export default Home
+export default Movies
