@@ -1,19 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import Home from './components/Home';
-import { Route, Routes, Link } from "react-router-dom";
+import Movies from './components/Movies';
+import { Route, Routes} from "react-router-dom";
 import MovieDescription from './components/MovieDescription';
-import { useEffect, useState } from "react"
+import { useState } from "react";
+import constants from './utils/constants';
 
 function App() {
-  // const [title, setTitle] = useState()
-  // const [date, setDate] = useState()
-  // const [ower, setOwer] = useState()
   const [obj, setObj] = useState()
+  console.log(constants.PAGES.popular.url)
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home setObj={setObj}/>} />
+        <Route path="/" element={<Movies setObj={setObj} path={constants.PAGES.popular.url}/>} />
         <Route path="/film_About/:id" element={<MovieDescription obj={obj}/>} />
       </Routes>
     </div>
