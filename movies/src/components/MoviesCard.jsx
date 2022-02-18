@@ -8,19 +8,17 @@ import Rating from '@mui/material/Rating';
 const useStyle = makeStyles({
     cardImageStyle: {
         '&.MuiCardMedia-root': {
-            width: "220px",
-            height: "335px",
+            width: "250px",
+            height: "380px",
             objectFit: 'cover',
             borderRadius: '0.8rem',
             boxShadow: '0px 0px 20px 0px #000000',
-            transition: 'all 300ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s',
             backgroundColor: 'transparent',
         }
     },
     cardContent: {
         '&.MuiCardContent-root': {
             width: 180,
-            textDecoration: 'none',
             textAlign: 'center',
         },
     },
@@ -31,7 +29,6 @@ const useStyle = makeStyles({
         alignItems: 'center',
         width: 220 * 1.03,
         '&:hover': {
-            transform: 'scale(1.03)',
             '& .MuiTypography-root': {
                 color: 'white'
             }
