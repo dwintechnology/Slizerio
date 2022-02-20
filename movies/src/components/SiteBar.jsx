@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -12,7 +11,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import AlbumIcon from '@mui/icons-material/Album';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, ThemeProvider } from '@mui/styles';
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import Appbar from './AppBar';
+import { refType } from '@mui/utils';
 const drawerWidth = 240;
 const style = makeStyles({
         hovers:{
@@ -27,25 +30,61 @@ const style = makeStyles({
             },
             padding:"20px"
           },
+          AppbarStyle:{
+            display:"none"
+          },
+          pasive:{
+            display:"none"
+          },
+          
+          "@media only screen and (max-width: 1000px)":{
+            AppbarStyle:{
+              display:"block"
+            },
+            mobileBox:{
+              display:"none"
+            },
+            active:{
+              display:"block"
+            },
+            appBtn:{
+              backgroundColor:"transparent",
+              border:"none"
+            }
+          }
 })
 export default function SiteBar({setObj}) {
-    const styles = style()
+  let [boolean ,setBollean] = React.useState(false)
+  let [active, setActive] = React.useState()
+  const styles = style()
     return (
-      <Box sx={{ display: 'flex'}}>
+      <>
+      <AppBar className={styles.AppbarStyle} position="fixed" sx={{ zIndex: "auto", backgroundColor:"#b0bec5"}}>
+        <button className={styles.appBtn} onClick={
+          ()=>{
+            setActive(!boolean)
+          }
          
-        <CssBaseline />
-        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        }><MenuIcon/></button>
+        
         </AppBar>
+        <div  className={active ? styles.active : styles.pasive}>
+        <Appbar/> 
+        </div>
+       
+      {/* <Appbar/> */}
+      <Box className={styles.mobileBox} sx={{ display: 'flex'}}>
+        <CssBaseline />
+        
         <Drawer
           variant="permanent"
           sx={{
             width: drawerWidth,
             flexShrink: 0,
             
-            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box'},
+            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', position:"unset"},
           }}
         >
-          <Toolbar />
           <Box className={styles.positionNone} sx={{ overflow: 'auto'}}>
             <List  >
             <div style={{display:"flex", justifyContent:"center"}}>
@@ -76,5 +115,6 @@ export default function SiteBar({setObj}) {
           </Box>
         </Drawer>
       </Box>
+      </>
     );
   }

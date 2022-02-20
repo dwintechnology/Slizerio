@@ -129,7 +129,7 @@ function MovieDescription({ obj }) {
                     <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
                     <div className={descriptionStyle.section1}>
                         <div className={descriptionStyle.starsDIV}>
-                        <Rating  sx={{marginRight:"5px", color:"black"}} name="simple-controlled" precision={0.5} value={(obj.results[id].vote_average*5)/9}/>
+                        <Rating  sx={{marginRight:"5px", color:"black"}} name="simple-controlled" precision={0.5} value={(obj.results[id].vote_average*5)/9 } readOnly/>
                         <span> {obj.results[id].vote_average} </span>
                         </div>
                         <h2 className={descriptionStyle.section1Language}><span>{obj.results[id].original_language}</span>/<span>{obj.results[id].release_date}</span></h2>

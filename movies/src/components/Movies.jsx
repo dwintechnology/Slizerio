@@ -102,7 +102,7 @@ function Movies({ setObj, path}) {
     return (
         <div>
             <Search setData={setData} />
-            <Grid container  columns={{ xs: 1, sm: 6, md: 15 }} columnSpacing={1} spacing={0.5}>
+            <Grid container  columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0.5}>
                 {items}
             </Grid>
             {(page > 1) && <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>}
