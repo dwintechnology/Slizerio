@@ -8,6 +8,7 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 const style = makeStyles({
     parent: {
         display: "flex",
@@ -105,8 +106,8 @@ const style = makeStyles({
             height: "400px"
         },
         bigDIV2:{
-            marginLeft:"0px",
-            width:"530px"
+            marginLeft:"80px",
+            width:"516px"
         }
     },
     "@media only screen and (max-width: 540px)":{
@@ -117,6 +118,7 @@ const style = makeStyles({
 })
 function MovieDescription({ obj }) {
     const descriptionStyle = style()
+    const navigate = useNavigate();
     let { id } = useParams();
     return (
         <div className={descriptionStyle.parent}>
@@ -166,12 +168,11 @@ function MovieDescription({ obj }) {
                         </Button>
                        </div>
                         <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px",     border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
-                           <Link sx={{ textDecoration: "none", color: "white", alignItems:"center", display:"flex" }} href="/">
+                           <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems:"center", display:"flex" }}>
                                <ArrowBackIcon/>
-                               Home
+                               Back
                                </Link>
                         </Button>
-
                     </div>
                 </div>
             </div>

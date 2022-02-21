@@ -11,19 +11,27 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import AlbumIcon from '@mui/icons-material/Album';
-import { makeStyles, ThemeProvider } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import IconButton from '@mui/material/IconButton';
 import Appbar from './AppBar';
-import { refType } from '@mui/utils';
+import { Link } from "react-router-dom";
 const drawerWidth = 240;
 const style = makeStyles({
         hovers:{
             '&:hover':{
                 border:"1px solid #516a74",
                 borderRadius: "2rem"
-            }
+            },
+            '&:target':{
+              border:"1px solid #516a74",
+              borderRadius: "2rem"
+          }
         },
+        // active:{
+        //     border:"1px solid #516a74",
+        //     borderRadius: "2rem"
+        
+        // },
         positionNone:{
             '&::-webkit-scrollbar':{
               display:"none"
@@ -31,9 +39,6 @@ const style = makeStyles({
             padding:"20px"
           },
           AppbarStyle:{
-            display:"none"
-          },
-          pasive:{
             display:"none"
           },
           
@@ -44,38 +49,31 @@ const style = makeStyles({
             mobileBox:{
               display:"none"
             },
-            active:{
-              display:"block"
-            },
             appBtn:{
               backgroundColor:"transparent",
               border:"none"
             }
           }
 })
-export default function SiteBar({setObj}) {
-  let [boolean ,setBollean] = React.useState(false)
-  let [active, setActive] = React.useState()
+export default function SiteBar({setTitle}) {
+  // let [boolean ,setBollean] = React.useState(false)
+  let [active, setActive] = React.useState(false)
+  console.log(active)
   const styles = style()
     return (
       <>
       <AppBar className={styles.AppbarStyle} position="fixed" sx={{ zIndex: "auto", backgroundColor:"#b0bec5"}}>
         <button className={styles.appBtn} onClick={
           ()=>{
-            setActive(!boolean)
+            setActive(true)
           }
          
         }><MenuIcon/></button>
         
         </AppBar>
-        <div  className={active ? styles.active : styles.pasive}>
-        <Appbar/> 
-        </div>
-       
-      {/* <Appbar/> */}
-      <Box className={styles.mobileBox} sx={{ display: 'flex'}}>
+        {(active) && <Appbar setActive={setActive} active={active}/> }
+        <Box className={styles.mobileBox} sx={{ display: 'flex'}}>
         <CssBaseline />
-        
         <Drawer
           variant="permanent"
           sx={{
@@ -92,13 +90,20 @@ export default function SiteBar({setObj}) {
             </div>
             <h5>DISCOVER</h5>
               {['Popular', 'Top Rated', 'Upcoming'].map((text, index) => (
-                <ListItem  button className={styles.hovers}  key={text} >
+                <Link  key={index} to={`/${text}`} onClick={(e)=>{
+                  setTitle(text)
+                  // e.target.className=styles.active
+                }}>
+                <ListItem  button className={styles.hovers}   >
                   <ListItemIcon>
                   {index % 3 === 0 ?  <FavoriteIcon/> :index % 2 !== 0 ? <AirlineStopsIcon/> : <UpcomingIcon/>}
                     
                   </ListItemIcon>
+                  
                   <ListItemText sx={{color:"#516a74"}} primary={text} />
+                    
                 </ListItem>
+                </Link>
               ))}
             </List>
             <List>

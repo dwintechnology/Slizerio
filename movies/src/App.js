@@ -9,18 +9,20 @@ import constants from './utils/constants';
 
 function App() {
   const [obj, setObj] = useState()
-  console.log(constants.PAGES.popular.url)
+  const [title, setTitle] = useState("Popular")
+  
   return (
     <div className="App">
-
       <Grid container columns={{ xs: 20 }} columnSpacing={1}>
         <Grid item xs={4} >
-          <SiteBar />
+          <SiteBar setTitle={setTitle}/>
         </Grid>
         <Grid item xs={16} >
           <Routes>
-            <Route path="/" element={<Movies setObj={setObj} path={constants.PAGES.popular.url} />} />
-
+            <Route path="/" element={<Movies title={title} setObj={setObj} path={constants.PAGES.popular.url} />} />
+            <Route path="/Popular" element={<Movies title={title} setObj={setObj} path={constants.PAGES.popular.url} />} />
+            <Route path="/Top%20Rated" element={<Movies title={title} setObj={setObj} path={constants.PAGES.rated.url} />} />
+            <Route path="/Upcoming" element={<Movies title={title} setObj={setObj} path={constants.PAGES.upcoming.url} />} />
             <Route path="/film_About/:id" element={<MovieDescription obj={obj} />} />
           </Routes>
         </Grid>

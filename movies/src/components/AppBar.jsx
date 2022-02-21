@@ -12,80 +12,73 @@ import UpcomingIcon from '@mui/icons-material/Upcoming';
 import AlbumIcon from '@mui/icons-material/Album';
 import { makeStyles } from '@mui/styles';
 const drawerWidth = 240;
-    const style = makeStyles({
-        hovers:{
-            '&:hover':{
-                border:"1px solid white",
-                borderRadius: "2rem"
-            }
-        },
-        boxing:{
-            display:"flex",
-        },
-        NONE:{
-            display:"none"
-        },
-        titles:{
-            color:"white"
-        },
-        closes:{
-            display:"flex",
-            justifyContent:"end"
-        },
-        closesBtn:{
-            backgroundColor:"transparent",
-            border:"none",
-            color:"white",
-            fontSize:"15px"
-        }
-    })
-export default function Appbar(){
-    let [boolean ,setBollean] = React.useState()
-    const styles = style()
- return(
-     <>
-     
-    
-    <Box className={boolean ?  styles.NONE :styles.boxing} >
-        <CssBaseline/>
+const style = makeStyles({
+  hovers: {
+    '&:hover': {
+      border: "1px solid white",
+      borderRadius: "2rem"
+    }
+  },
+  boxing: {
+    display: "flex",
+  },
+  NONE: {
+    display: "none"
+  },
+  titles: {
+    color: "white"
+  },
+  closes: {
+    display: "flex",
+    justifyContent: "end"
+  },
+  closesBtn: {
+    backgroundColor: "transparent",
+    border: "none",
+    color: "white",
+    fontSize: "15px"
+  }
+})
+export default function Appbar({ setActive, active }) {
+  const styles = style()
+  return (
+    <>
+      <Box className={!active ? styles.NONE : styles.boxing} >
+        <CssBaseline />
         <Drawer
           variant="permanent"
           sx={{
             width: drawerWidth,
             flexShrink: 0,
-            
-            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', zIndex:"10"},
+
+            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', zIndex: "10" },
           }}
         >
-        
-          <Box  sx={{ overflow: 'auto', backgroundColor:"#37474f", padding:"20px"}}>
-          <div className={styles.closes}>
-        <button className={styles.closesBtn}  onClick={
-          ()=>{
-            setBollean(true)
-          }
-         
-        }>X</button>
-        </div>
+          <Box sx={{ overflow: 'auto', backgroundColor: "#37474f", padding: "20px" }}>
+            <div className={styles.closes}>
+              <button className={styles.closesBtn} onClick={
+                () => {
+                  setActive(false)
+                }
+              }>X</button>
+            </div>
             <List  >
-            <h5 className={styles.titles}>DISCOVER</h5>
-            
+              <h5 className={styles.titles}>DISCOVER</h5>
               {['Popular', 'Top Rated', 'Upcoming'].map((text, index) => (
-                <ListItem  button className={styles.hovers}  key={text} >
+                <ListItem button className={styles.hovers} key={text} >
                   <ListItemIcon>
-                  {index % 3 === 0 ?  <FavoriteIcon/> :index % 2 !== 0 ? <AirlineStopsIcon/> : <UpcomingIcon/>}
-                    
+                    {index % 3 === 0 ? <FavoriteIcon /> : index % 2 !== 0 ? <AirlineStopsIcon /> : <UpcomingIcon />}
                   </ListItemIcon>
-                  <ListItemText sx={{color:"#516a74"}} primary={text} />
+                  <ListItemText sx={{ color: "#516a74" }} primary={text} />
                 </ListItem>
               ))}
             </List>
             <List>
-            <h5 className={styles.titles}>GENRES</h5>
+              <h5 className={styles.titles}>GENRES</h5>
               {['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'].map((text, index) => (
-                <ListItem button   sx={{color:"#516a74" , fontSize: "1.2rem", fontWeight: 600, lineHeight: 1}} key={text}>
+                <ListItem button sx={{ color: "#516a74", fontSize: "1.2rem", fontWeight: 600, lineHeight: 1 }} key={text}>
                   <ListItemIcon>
-                    <AlbumIcon/>
+                    <AlbumIcon />
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
@@ -94,6 +87,6 @@ export default function Appbar(){
           </Box>
         </Drawer>
       </Box>
-      </>
-) 
+    </>
+  )
 }
