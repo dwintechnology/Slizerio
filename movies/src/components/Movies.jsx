@@ -5,7 +5,9 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import MoviesCard from "./MoviesCard";
 import Search from "./Search";
-
+import { useSearchParams } from "react-router-dom";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const useStyle = makeStyles({
     cardStyle: {
         '&.MuiCardMedia-root': {
@@ -23,8 +25,8 @@ const useStyle = makeStyles({
         boxShadow: 'unset !important',
         alignItems: 'center',
         flexDirection: 'column',
-        width: '250px',
-        width: '250px',
+        width: '290px',
+        height: '600px',
         '&:hover': {
             transform: 'scale(1.03)',
             transition: 'all 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 0s;',
@@ -37,7 +39,7 @@ const useStyle = makeStyles({
                 color: 'white',
 
             },
-            '& .Home-link-3': {
+            '& a': {
                 backgroundColor: '#38474f',
                 boxShadow: '0px 0px 20px 0px #000000',
                 borderRadius: '12.8px',
@@ -56,26 +58,54 @@ const useStyle = makeStyles({
         "&:link": {
             textDecoration: "none !important"
         }
-    }
+    },
+    searchWrapper: {
+        display: "flex",
+        justifyContent: "end",
+        marginTop: "50px"
+    },
+    title: {
+        color: "#263238",
+        fontWeight: 100,
+        fontSize: "35px",
+        letterSpacing: "0px",
+        textTransform: "uppercase",
+        marginBottom: "0px"
+    },
+    titleParagraph: {
+        color: "#37474f",
+        textTransform: "uppercase",
+        fontWeight: "600",
+        marginTop: "0px"
+    },
+    paginationDIV: {
+        display: "flex",
+        justifyContent: 'space-between',
+        padding:"20px 25px 5px 25px",
+        marginBottom:"15px",
+        '& a':{
+            borderRadius: "28.75px",
+            padding:"10px 30px",
+            backgroundColor:"#263238",
+            textDecoration:"none",
+            color:"white",
+            display:'flex',
+            alignItems:"center"
+        }
+    },
+    
+
 }, {
     name: 'Home'
 })
 
-function Movies({ setObj, path }) {
+function Movies({ setObj, path, title }) {
+    const [searchParams, setSearchParams] = useSearchParams()
+
     const [data, setData] = useState();
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle()
-    console.log(data)
 
-    function LoadMovie() {
-        setPage(page + 1)
-        getMovies(page + 1)
-    }
-
-    function LoadPreviousMovies() {
-        setPage(page - 1)
-        getMovies(page - 1)
-    }
 
     function getMovies(page) {
         fetch(`${path}${page}`)
@@ -85,7 +115,7 @@ function Movies({ setObj, path }) {
 
     useEffect(() => {
         getMovies(page)
-    }, [])
+    }, [path, page])
 
     let items = data?.results.map((movie, index) => {
         return (
@@ -107,12 +137,26 @@ function Movies({ setObj, path }) {
     })
     return (
         <div>
-            <Search setData={setData} />
-            <Grid container columns={{ xs: 1, sm: 6, md: 15 }} columnSpacing={1} spacing={0.5}>
+            <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
+                <Grid item xs={12}>
+                    <div className={cardStyle.searchWrapper}>
+                        <Search setData={setData} />
+                    </div>
+                    <div>
+                        <h1 className={cardStyle.title}>{title}</h1>
+                        <p className={cardStyle.titleParagraph}>Movies</p>
+                    </div>
+                </Grid>
                 {items}
             </Grid>
-            {(page > 1) && <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>}
-            <button onClick={LoadMovie}>{`Page ${page + 1}`}</button>
+            <div className={cardStyle.paginationDIV}>
+                <div>
+                    {(page > 1) && <Link onClick={() => { setPage(+page - 1) }} to={`?page=${+page - 1}`}><ArrowBackIcon/> {` Page ${+page - 1}`}</Link>}
+                </div>
+                <div>
+                    <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon/></Link>
+                </div>
+            </div>
         </div>
     )
 }
