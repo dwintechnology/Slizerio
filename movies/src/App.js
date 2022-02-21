@@ -7,12 +7,12 @@ import constants from './utils/constants';
 
 function App() {
   const [obj, setObj] = useState()
-  console.log(constants.PAGES.popular.url)
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Movies setObj={setObj} path={constants.PAGES.popular.url}/>} />
-        <Route path="/film_About/:id" element={<MovieDescription obj={obj}/>} />
+        <Route path="/film_About/:id" element={<MovieDescription obj={obj}/>} setObj={setObj}/>
       </Routes>
     </div>
   

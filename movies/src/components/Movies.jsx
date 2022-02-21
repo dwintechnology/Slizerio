@@ -63,7 +63,6 @@ function Movies({ setObj, path}) {
     const [data, setData] = useState();
     const [page, setPage] = useState(1);
     const cardStyle = useStyle()
-    console.log(data)
 
     function LoadMovie() {
         setPage(page + 1)
@@ -74,9 +73,14 @@ function Movies({ setObj, path}) {
         getMovies(page - 1)
     }
     function getMovies(page) {
-        fetch(`${path}${page}`)
+        console.log(page);
+        
+        if(true){
+            fetch(`${path}${page}`)
             .then((a) => { return a.json() })
             .then((b) => { setData(b) })
+        }
+        console.log(data);
     }
     useEffect(() => {
         getMovies(page)

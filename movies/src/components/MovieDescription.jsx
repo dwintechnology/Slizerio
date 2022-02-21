@@ -1,6 +1,6 @@
 import { Button, Rating } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import Link from '@mui/material/Link';
+import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import constants from '../utils/constants';
 import LinkIcon from '@mui/icons-material/Link';
@@ -8,6 +8,8 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Movies from './Movies';
+
 const style = makeStyles({
     parent: {
         display: "flex",
@@ -119,6 +121,7 @@ const style = makeStyles({
 function MovieDescription({ obj }) {
     const descriptionStyle = style()
     let { id } = useParams();
+    console.log(obj)
     return (
         <div className={descriptionStyle.parent}>
             <div className={descriptionStyle.bigdiv}>
@@ -167,7 +170,11 @@ function MovieDescription({ obj }) {
                         </Button>
                        </div>
                         <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px",     border: "1px solid #242f34" }} variant="contained" color="success">
-                           <Link sx={{ textDecoration: "none", color: "white", alignItems:"center", display:"flex" }} href="/">
+                           <Link style={{ textDecoration: "none", color: "white", alignItems:"center", display:"flex" }} to={`/`} onClick={()=>{
+                            //    console.log(obj)
+                            // setPage(obj.page)
+                            //    console.log(obj)
+                           }}>
                                <ArrowBackIcon/>
                                Home
                                </Link>
