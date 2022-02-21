@@ -44,8 +44,10 @@ const useStyle = makeStyles({
                 boxShadow: '0px 0px 20px 0px #000000',
                 borderRadius: '12.8px',
                 width: '250px',
-
             },
+            '& .MuiRating-sizeMedium': {
+                color: '#b0bec5',
+            }
         },
     },
     link: {
@@ -96,20 +98,25 @@ const useStyle = makeStyles({
 }, {
     name: 'Home'
 })
+
 function Movies({ setObj, path, title }) {
     const [searchParams, setSearchParams] = useSearchParams()
+
     const [data, setData] = useState();
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle()
+
 
     function getMovies(page) {
         fetch(`${path}${page}`)
             .then((a) => { return a.json() })
             .then((b) => { setData(b) })
     }
+
     useEffect(() => {
         getMovies(page)
     }, [path, page])
+
     let items = data?.results.map((movie, index) => {
         return (
             <Grid key={index} item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -153,4 +160,5 @@ function Movies({ setObj, path, title }) {
         </div>
     )
 }
+
 export default Movies
