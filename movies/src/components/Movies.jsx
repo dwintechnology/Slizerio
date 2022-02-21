@@ -36,7 +36,7 @@ const useStyle = makeStyles({
             },
             '& .MuiTypography-root': {
                 color: 'white',
-            
+
             },
             '& .Home-link-3': {
                 backgroundColor: '#38474f',
@@ -59,7 +59,7 @@ const useStyle = makeStyles({
 }, {
     name: 'Home'
 })
-function Movies({ setObj, path}) {
+function Movies({ setObj, path }) {
     const [data, setData] = useState();
     const [page, setPage] = useState(1);
     const cardStyle = useStyle()
@@ -73,14 +73,10 @@ function Movies({ setObj, path}) {
         getMovies(page - 1)
     }
     function getMovies(page) {
-        console.log(page);
-        
-        if(true){
-            fetch(`${path}${page}`)
+        fetch(`${path}${page}`)
             .then((a) => { return a.json() })
             .then((b) => { setData(b) })
-        }
-        console.log(data);
+
     }
     useEffect(() => {
         getMovies(page)
@@ -106,7 +102,7 @@ function Movies({ setObj, path}) {
     return (
         <div>
             <Search setData={setData} />
-            <Grid container  columns={{ xs: 1, sm: 6, md: 15 }} columnSpacing={1} spacing={0.5}>
+            <Grid container columns={{ xs: 1, sm: 6, md: 15 }} columnSpacing={1} spacing={0.5}>
                 {items}
             </Grid>
             {(page > 1) && <button onClick={LoadPreviousMovies}>{`Page ${page - 1}`}</button>}
