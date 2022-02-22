@@ -101,7 +101,6 @@ const useStyle = makeStyles({
 
 function Movies({ setObj, path, title }) {
     const [searchParams, setSearchParams] = useSearchParams()
-
     const [data, setData] = useState();
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle()
