@@ -90,7 +90,6 @@ export default function SiteBar({setTitle}) {
               {['Popular', 'Top Rated', 'Upcoming'].map((text, index) => (
                 <Link  key={index} to={`/${text}`} onClick={(e)=>{
                   setTitle(text)
-                  // e.target.className=styles.active
                 }}>
                 <ListItem  button className={styles.hovers}   >
                   <ListItemIcon>

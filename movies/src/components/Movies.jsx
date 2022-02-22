@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
@@ -8,7 +8,8 @@ import Search from "./Search";
 import { useSearchParams } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import NonExistentPage from "./NonExistentPage"
+import gif from '../gif.gif';
+
 const useStyle = makeStyles({
     cardStyle: {
         '&.MuiCardMedia-root': {
@@ -94,28 +95,31 @@ const useStyle = makeStyles({
             alignItems: "center"
         }
     },
-
-
+    gif: {
+        width: '100%',
+        height: 'auto',
+        padding: '19% 41% 0% 47%',
+    },
 }, {
     name: 'Home'
 })
 
-function Movies({ setObj, path, title }) {
+function Movies({ setObj, path, title, search = true , setSearchPath}) {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [data, setData] = useState();
+    const [data, setData] = useState({});
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle()
-
+    let navigate = useNavigate();
 
     function getMovies(page) {
         try {
             fetch(`${path}${page}`)
                 .then((a) => { return a.json() })
                 .then((b) => {
-                    if ('errors' in b) {
-                        throw new Error('Not Found')
-                    }
                     setData(b)
+                    if ('errors' in b) {
+                        return navigate("/Something_went_wrong");
+                    }
                 })
         } catch (error) {
             console.log(error)
@@ -126,7 +130,11 @@ function Movies({ setObj, path, title }) {
         getMovies(page)
     }, [path, page])
 
-    let items = data?.results.map((movie, index) => {
+    useEffect(() => {
+        setPage(searchParams.get("page") === null ? 1 : searchParams.get("page"))
+    }, [title])
+
+    let items = data?.results?.map((movie, index) => {
         return (
             <Grid key={index} item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Card className={cardStyle.cardMainStyle}>
@@ -136,8 +144,7 @@ function Movies({ setObj, path, title }) {
                             e.stopPropagation();
                             setObj(data)
                         }}
-                        to={`/film_About/${index}`}
-                    >
+                        to={`/film_About/${index}`}>
                         <MoviesCard movie={movie} />
                     </Link>
                 </Card>
@@ -145,19 +152,21 @@ function Movies({ setObj, path, title }) {
         )
     })
     return (
-        <div>
-            {data !== undefined ?
-                <>
+        <>
+            {Object.keys(data).length == 0 ? <img className={cardStyle.gif} src={gif} alt="loading ..." />
+                : <div>
                     <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
-                        <Grid item xs={12}>
-                            <div className={cardStyle.searchWrapper}>
-                                <Search setData={setData} />
-                            </div>
-                            <div>
-                                <h1 className={cardStyle.title}>{title}</h1>
-                                <p className={cardStyle.titleParagraph}>Movies</p>
-                            </div>
-                        </Grid>
+                        {search &&
+                            <Grid item xs={12}>
+                                <div className={cardStyle.searchWrapper}>
+                                    <Search setSearchPath={setSearchPath}/>
+                                </div>
+                                <div>
+                                    <h1 className={cardStyle.title}>{title}</h1>
+                                    <p className={cardStyle.titleParagraph}>Movies</p>
+                                </div>
+                            </Grid>
+                        }
                         {items}
                     </Grid>
                     <div className={cardStyle.paginationDIV}>
@@ -168,17 +177,9 @@ function Movies({ setObj, path, title }) {
                             <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon /></Link>
                         </div>
                     </div>
-                </>
-                : <>
-                    <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
-                        <Grid item xs={12}>
-                            <div className={cardStyle.searchWrapper}>
-                                <Search setData={setData} />
-                            </div>
-                        </Grid>
-                        <NonExistentPage setPage={setPage}/>
-                    </Grid></>}
-        </div>
+                </div>
+            }
+        </>
     )
 }
 
