@@ -104,7 +104,7 @@ function Movies({ setObj, path, title }) {
     const [data, setData] = useState();
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle()
-
+    console.log(data)
 
     function getMovies(page) {
         fetch(`${path}${page}`)

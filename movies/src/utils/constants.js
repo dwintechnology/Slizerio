@@ -6,6 +6,7 @@ const API_KEYS =  'e366d974f73ae203397850eadc7bce1f';
 export default {
     API_PATH: API_PATH,
     API_KEY: API_KEY,
+    API_KEYS: API_KEYS,
     BIG_IMG_PATH: 'https://image.tmdb.org/t/p/w780',
     SMALL_IMG_PATH: 'https://image.tmdb.org/t/p/w342',
     PAGES: {

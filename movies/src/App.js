@@ -6,11 +6,12 @@ import SiteBar from './components/SiteBar';
 import { Grid } from '@mui/material';
 import { useState } from "react";
 import constants from './utils/constants';
+import ActorsCard from './components/ActorsCard';
 
 function App() {
   const [obj, setObj] = useState()
   const [title, setTitle] = useState("Popular")
-  
+  const [people, setPeople] = useState()
   return (
     <div className="App">
       <Grid container columns={{ xs: 20 }} columnSpacing={1}>
@@ -43,8 +44,8 @@ function App() {
             <Route path="/War" element={<Movies title={title} setObj={setObj} path={constants.PAGES.war.url} />} />
             <Route path="/Western" element={<Movies title={title} setObj={setObj} path={constants.PAGES.western.url} />} />
 
-            <Route path="/film_About/:id" element={<MovieDescription obj={obj} />} />
-
+            <Route path="/film_About/:id" element={<MovieDescription obj={obj} setPeople={setPeople} />} />
+            <Route path="/Person/:id" element={<ActorsCard people={people}/> }/>
 
           </Routes>
         </Grid>
