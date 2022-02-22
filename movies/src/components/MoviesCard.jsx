@@ -16,6 +16,14 @@ const useStyle = makeStyles({
             backgroundColor: 'transparent',
         }
     },
+    cardNotFoundImageStyle: {
+        width: "250px",
+        height: "380px",
+        objectFit: 'contain',
+        borderRadius: '0.8rem',
+        boxShadow: '0px 0px 20px 0px #000000',
+        backgroundColor: 'transparent',
+    },   
     cardContent: {
         '&.MuiCardContent-root': {
             width: 180,
@@ -40,13 +48,12 @@ const useStyle = makeStyles({
 
 function MoviesCard({ movie }) {
     const cardStyle = useStyle();
-    console.log(movie)
     return (
         <div className={cardStyle.cardHover}>
             <CardMedia
-                className={cardStyle.cardImageStyle}
+                className={movie.poster_path == null ? `${cardStyle.cardNotFoundImageStyle}` : `${cardStyle.cardImageStyle}`}
                 component="img"
-                image={`${constants.SMALL_IMG_PATH}${movie.poster_path}`}
+                image={movie.poster_path == null ? 'https://movies.fidalgo.dev/static/media/nothing.4c58037b.svg' : `${constants.SMALL_IMG_PATH}${movie.poster_path}`}
                 alt="Paella dish"
             />
             <CardContent className={cardStyle.cardContent}>

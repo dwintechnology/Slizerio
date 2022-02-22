@@ -1,9 +1,7 @@
-import { useState } from "react";
 import constants from "../utils/constants";
 import TextField from '@mui/material/TextField';
 
 function Search({ setData }) {
-    const [inputValue, setInputValue] = useState()
     
     function SearchMovies(searchQuery) {
         fetch(`${constants.API_PATH}/search/movie?api_key=${constants.API_KEY}&query=${searchQuery}`)
@@ -12,7 +10,7 @@ function Search({ setData }) {
     }
 
     return (
-        <form action="submit" onSubmit={(e, v)=>{
+        <form action="submit" onSubmit={(e)=>{
             e.preventDefault()
             SearchMovies(e.target[0].value)
         }}>

@@ -56,9 +56,7 @@ const style = makeStyles({
           }
 })
 export default function SiteBar({setTitle}) {
-  // let [boolean ,setBollean] = React.useState(false)
   let [active, setActive] = React.useState(false)
-  console.log(active)
   const styles = style()
     return (
       <>
