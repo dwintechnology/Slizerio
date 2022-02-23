@@ -99,12 +99,12 @@ const useStyle = makeStyles({
     name: 'Home'
 })
 
-function Movies({ setObj, path, title, search = true , setSearchParam}) {
+function Movies({ path, title, search = true , setSearchParam}) {
     const [searchParams, setSearchParams] = useSearchParams()
     const [data, setData] = useState({});
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     function getMovies(page) {
         try {
@@ -134,11 +134,8 @@ function Movies({ setObj, path, title, search = true , setSearchParam}) {
                 <Card className={cardStyle.cardMainStyle}>
                     <Link
                         className={cardStyle.link}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setObj(data)
-                        }}
-                        to={`/film_About/${index}`}>
+                        to={`/film_About/${movie.id}`}
+                    >
                         <MoviesCard movie={movie} />
                     </Link>
                 </Card>
