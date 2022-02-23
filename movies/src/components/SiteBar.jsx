@@ -22,16 +22,17 @@ const style = makeStyles({
                 border:"1px solid #516a74",
                 borderRadius: "2rem"
             },
-            '&:target':{
+            '&:focus':{
+              border:"1px solid #516a74",
+              borderRadius: "2rem"
+          },
+        },
+        hoverss:{
+          '&:hover':{
               border:"1px solid #516a74",
               borderRadius: "2rem"
           }
         },
-        // active:{
-        //     border:"1px solid #516a74",
-        //     borderRadius: "2rem"
-        
-        // },
         positionNone:{
             '&::-webkit-scrollbar':{
               display:"none"
@@ -88,17 +89,17 @@ export default function SiteBar({setTitle}) {
             </div>
             <h5>DISCOVER</h5>
               {['Popular', 'Top Rated', 'Upcoming'].map((text, index) => (
-                <Link  key={index} to={`/${text}`} onClick={(e)=>{
+                <Link   key={index} to={`/${text}`} onClick={(e)=>{
                   setTitle(text)
-                  // e.target.className=styles.active
+                 
                 }}>
-                <ListItem  button className={styles.hovers}   >
+                <ListItem  button className={styles.hovers }   >
                   <ListItemIcon>
                   {index % 3 === 0 ?  <FavoriteIcon/> :index % 2 !== 0 ? <AirlineStopsIcon/> : <UpcomingIcon/>}
                     
                   </ListItemIcon>
                   
-                  <ListItemText sx={{color:"#516a74"}} primary={text} />
+                  <ListItemText   sx={{color:"#516a74"}} primary={text} />
                     
                 </ListItem>
                 </Link>
@@ -107,12 +108,14 @@ export default function SiteBar({setTitle}) {
             <List>
             <h5>GENRES</h5>
               {['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'].map((text, index) => (
-                <ListItem button className={styles.hovers}  sx={{color:"#516a74" , fontSize: "1.2rem", fontWeight: 600, lineHeight: 1}} key={text}>
+               <Link   key={index} to={`/${text}`} >
+               <ListItem button className={styles.hovers}  sx={{color:"#516a74" , fontSize: "1.2rem", fontWeight: 600, lineHeight: 1}} key={text}>
                   <ListItemIcon>
                     <AlbumIcon/>
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
+                </Link>
               ))}
             </List>
           </Box>

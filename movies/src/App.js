@@ -6,24 +6,28 @@ import SiteBar from './components/SiteBar';
 import { Grid } from '@mui/material';
 import { useState } from "react";
 import constants from './utils/constants';
+import ActorsCard from './components/ActorsCard';
 
 function App() {
-  const [obj, setObj] = useState()
   const [title, setTitle] = useState("Popular")
-  
   return (
     <div className="App">
       <Grid container columns={{ xs: 20 }} columnSpacing={1}>
         <Grid item xs={4} >
-          <SiteBar setTitle={setTitle}/>
+          <SiteBar setTitle={setTitle} />
         </Grid>
         <Grid item xs={16} >
           <Routes>
-            <Route path="/" element={<Movies title={title} setObj={setObj} path={constants.PAGES.popular.url} />} />
-            <Route path="/Popular" element={<Movies title={title} setObj={setObj} path={constants.PAGES.popular.url} />} />
-            <Route path="/Top%20Rated" element={<Movies title={title} setObj={setObj} path={constants.PAGES.rated.url} />} />
-            <Route path="/Upcoming" element={<Movies title={title} setObj={setObj} path={constants.PAGES.upcoming.url} />} />
-            <Route path="/film_About/:id" element={<MovieDescription obj={obj} />} />
+            <Route path="/" element={<Movies title={title} path={constants.PAGES.popular.url} />} />
+            {
+              Object.values(constants.PAGES).map((page) => {
+                return <Route key={page.route} path={page.route} element={<Movies title={page.title} path={page.url} />} />
+
+              })
+            }
+            <Route path="/film_About/:id" element={<MovieDescription />} />
+            <Route path="/Person/:id" element={<ActorsCard />} />
+
           </Routes>
         </Grid>
       </Grid>
