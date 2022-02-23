@@ -8,6 +8,7 @@ import Search from "./Search";
 import { useSearchParams } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import NonExistentPage from "./NonExistentPage"
 const useStyle = makeStyles({
     cardStyle: {
         '&.MuiCardMedia-root': {
@@ -106,11 +107,20 @@ function Movies({ path, title }) {
     const cardStyle = useStyle()
 
     function getMovies(page) {
-        fetch(`${path}${page}`)
-            .then((a) => { return a.json() })
-            .then((b) => { setData(b) })
-    }
+        try {
+            fetch(`${path}${page}`)
+                .then((a) => { return a.json() })
+                .then((b) => {
+                    if ('errors' in b) {
+                        throw new Error('Not Found')
+                    }
+                    setData(b)
+                })
+        } catch (error) {
+            console.log(error)
+        }
 
+    }
     useEffect(() => {
         getMovies(page)
     }, [path, page])
@@ -131,26 +141,38 @@ function Movies({ path, title }) {
     })
     return (
         <div>
-            <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
-                <Grid item xs={12}>
-                    <div className={cardStyle.searchWrapper}>
-                        <Search setData={setData} />
+            {data !== undefined ?
+                <>
+                    <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
+                        <Grid item xs={12}>
+                            <div className={cardStyle.searchWrapper}>
+                                <Search setData={setData} />
+                            </div>
+                            <div>
+                                <h1 className={cardStyle.title}>{title}</h1>
+                                <p className={cardStyle.titleParagraph}>Movies</p>
+                            </div>
+                        </Grid>
+                        {items}
+                    </Grid>
+                    <div className={cardStyle.paginationDIV}>
+                        <div>
+                            {(page > 1) && <Link onClick={() => { setPage(+page - 1) }} to={`?page=${+page - 1}`}><ArrowBackIcon /> {` Page ${+page - 1}`}</Link>}
+                        </div>
+                        <div>
+                            <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon /></Link>
+                        </div>
                     </div>
-                    <div>
-                        <h1 className={cardStyle.title}>{title}</h1>
-                        <p className={cardStyle.titleParagraph}>Movies</p>
-                    </div>
-                </Grid>
-                {items}
-            </Grid>
-            <div className={cardStyle.paginationDIV}>
-                <div>
-                    {(page > 1) && <Link onClick={() => { setPage(+page - 1) }} to={`?page=${+page - 1}`}><ArrowBackIcon /> {` Page ${+page - 1}`}</Link>}
-                </div>
-                <div>
-                    <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon /></Link>
-                </div>
-            </div>
+                </>
+                : <>
+                    <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
+                        <Grid item xs={12}>
+                            <div className={cardStyle.searchWrapper}>
+                                <Search setData={setData} />
+                            </div>
+                        </Grid>
+                        <NonExistentPage setPage={setPage} />
+                    </Grid></>}
         </div>
     )
 }

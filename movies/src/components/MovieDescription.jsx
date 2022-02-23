@@ -23,6 +23,13 @@ const style = makeStyles({
         boxShadow: "0rem 2rem 5rem #00000040",
         objectFit: 'cover',
     },
+    moviesNotFoundImg: {
+        width: "325px",
+        height: "474px",
+        borderRadius: "12.8px",
+        boxShadow: "0rem 2rem 5rem #00000040",
+        objectFit: 'contain',
+    },
     bigdiv: {
         display: "flex",
         justifyContent: "space-between"
@@ -141,7 +148,7 @@ function MovieDescription() {
         <div className={descriptionStyle.parent}>
             <div className={descriptionStyle.bigdiv}>
                 <div className={descriptionStyle.divIMGCENTER}>
-                    <img className={descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.poster_path}`} />
+                    <img className={obj.poster_path == null ? descriptionStyle.moviesNotFoundImg : descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.poster_path}`} />
                 </div>
                 <div className={descriptionStyle.bigDIV2}>
                     <h2 className={descriptionStyle.movieTITLE}>{obj.title}</h2>
