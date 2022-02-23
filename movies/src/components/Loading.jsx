@@ -3,9 +3,11 @@ import load from '../assets/load.gif'
 
 const useStyle = makeStyles({
     gif: {
-        width: '100%',
-        height: 'auto',
-        padding: '19% 41% 0% 47%',
+        width: '9%',
+        position: 'fixed',
+        left: '50%',
+        top: '50%',
+        marginLeft: '-4.5%',
     },
 }, {
     name: 'Loading'
