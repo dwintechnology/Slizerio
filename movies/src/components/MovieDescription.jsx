@@ -9,6 +9,8 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import Slider from './Slider';
+import { useEffect, useState } from "react";
+
 const style = makeStyles({
     parent: {
         display: "flex",
@@ -116,38 +118,53 @@ const style = makeStyles({
         }
     }
 })
-function MovieDescription({ obj, setPeople }) {
+function MovieDescription() {
     const descriptionStyle = style()
     const navigate = useNavigate();
     let { id } = useParams();
+    const [obj, setMovie] = useState()
+
+    function getMovie() {
+        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=e366d974f73ae203397850eadc7bce1f`)
+            .then((a) => { return a.json() })
+            .then((b) => { setMovie(b) })
+    }
+
+    useEffect(() => {
+        getMovie()
+    }, [])
+
+    if (!obj) {
+        return 'Loading'
+    }
     return (
         <div className={descriptionStyle.parent}>
             <div className={descriptionStyle.bigdiv}>
                 <div className={descriptionStyle.divIMGCENTER}>
-                    <img className={descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.results[id].poster_path}`} />
+                    <img className={descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.poster_path}`} />
                 </div>
                 <div className={descriptionStyle.bigDIV2}>
-                    <h2 className={descriptionStyle.movieTITLE}>{obj.results[id].title}</h2>
+                    <h2 className={descriptionStyle.movieTITLE}>{obj.title}</h2>
                     <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
                     <div className={descriptionStyle.section1}>
                         <div className={descriptionStyle.starsDIV}>
-                            <Rating sx={{ marginRight: "5px", color: "black" }} name="simple-controlled" precision={0.5} value={(obj.results[id].vote_average * 5) / 9} readOnly />
-                            <span> {obj.results[id].vote_average} </span>
+                            <Rating sx={{ marginRight: "5px", color: "black" }} name="simple-controlled" precision={0.5} value={(obj.vote_average * 5) / 9} readOnly />
+                            <span> {obj.vote_average} </span>
                         </div>
-                        <h2 className={descriptionStyle.section1Language}><span>{obj.results[id].original_language}</span>/<span>{obj.results[id].release_date}</span></h2>
+                        <h2 className={descriptionStyle.section1Language}><span>{obj.original_language}</span>/<span>{obj.release_date}</span></h2>
                     </div>
                     <h2 className={descriptionStyle.genresTITLE}>THE GENRES</h2>
                     <h3 className={descriptionStyle.genresTITLE}>
                         THE SYNOPSIS
                     </h3>
                     <p className={descriptionStyle.parentPARAGRAPH}>
-                        {obj.results[id].overview}
+                        {obj.overview}
                     </p>
                     <h2 className={descriptionStyle.genresTITLE}>
                         THE CAST
                     </h2>
                     <div>
-                        <Slider id={obj.results[id].id} setPeople={setPeople} />
+                        <Slider id={obj.id} />
                     </div>
                     <div className={descriptionStyle.buttonsDIV}>
                         <div>

@@ -1,6 +1,7 @@
 import constants from "../utils/constants";
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 
 const style = makeStyles({
     parent: {
@@ -11,7 +12,7 @@ const style = makeStyles({
         width: "409px",
         borderRadius: "20px",
         height: "567px",
-        objectFit:"cover",
+        objectFit: "cover",
     },
     actoresName: {
         marginLeft: "25px",
@@ -35,42 +36,45 @@ const style = makeStyles({
         fontSize: "20px",
         marginLeft: "25px",
     },
-    bioText:{
-        padding:"0px 100px 0px 0px",
+    bioText: {
+        padding: "0px 100px 0px 0px",
         marginLeft: "25px",
-        fontSize: "20px",marginLeft: "25px",
+        fontSize: "20px", marginLeft: "25px",
         lineHeight: 1.8,
         color: "#444444",
         fontWeight: 400,
         marginBottom: "48px",
     }
 })
-export default function ActorsCard({ people }) {
-    const Api_key = constants.API_KEYS
-    const Api_path = constants.API_PATH
-    let [castobj, setCastObj] = useState()
+export default function ActorsCard() {
+    const { id } = useParams();
+    const [actor, setActor] = useState()
+
     function getDATA() {
-        fetch(`${Api_path}/person/${people.id}?api_key=${Api_key}`)
+        fetch(`${constants.API_PATH}/person/${id}?api_key=${constants.API_KEY}`)
             .then((first) => { return first.json() })
-            .then((last) => { setCastObj(last) })
+            .then((last) => { setActor(last) })
     }
+
     useEffect(() => {
         getDATA()
     }, [])
+
     const actorsStyle = style()
-    const Img_path = constants.BIG_IMG_PATH
-    console.log(castobj)
+    if (!actor) {
+        return 'Loading'
+    }
     return (
         <div className={actorsStyle.parent}>
             <div>
-                <img className={actorsStyle.parentImg} src={people.profile_path === null ? 'https://movies.fidalgo.dev/static/media/person.fdbc4613.svg' : Img_path + people.profile_path} />
+                <img className={actorsStyle.parentImg} src={actor?.profile_path === null ? 'https://movies.fidalgo.dev/static/media/person.fdbc4613.svg' : constants.BIG_IMG_PATH + actor.profile_path} />
             </div>
             <div>
-                <h1 className={actorsStyle.actoresName}>{people.original_name}</h1>
-                <h1 className={actorsStyle.birthday}>{castobj?.birthday}</h1>
+                <h1 className={actorsStyle.actoresName}>{actor.name}</h1>
+                <h1 className={actorsStyle.birthday}>{actor?.birthday}</h1>
                 <h1 className={actorsStyle.bio}>The Biography</h1>
                 <p className={actorsStyle.bioText}>
-                    {castobj?.biography}
+                    {actor?.biography}
                 </p>
             </div>
         </div>

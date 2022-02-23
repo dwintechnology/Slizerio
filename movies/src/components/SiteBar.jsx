@@ -108,10 +108,7 @@ export default function SiteBar({setTitle}) {
             <List>
             <h5>GENRES</h5>
               {['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'].map((text, index) => (
-               <Link   key={index} to={`/${text}`} onClick={(e)=>{
-                setTitle(text)
-               
-              }}>
+               <Link   key={index} to={`/${text}`} >
                <ListItem button className={styles.hovers}  sx={{color:"#516a74" , fontSize: "1.2rem", fontWeight: 600, lineHeight: 1}} key={text}>
                   <ListItemIcon>
                     <AlbumIcon/>

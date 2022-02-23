@@ -40,7 +40,6 @@ const useStyle = makeStyles({
 
 function MoviesCard({ movie }) {
     const cardStyle = useStyle();
-    console.log(movie)
     return (
         <div className={cardStyle.cardHover}>
             <CardMedia

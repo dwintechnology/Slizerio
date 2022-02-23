@@ -81,30 +81,29 @@ const useStyle = makeStyles({
     paginationDIV: {
         display: "flex",
         justifyContent: 'space-between',
-        padding:"20px 25px 5px 25px",
-        marginBottom:"15px",
-        '& a':{
+        padding: "20px 25px 5px 25px",
+        marginBottom: "15px",
+        '& a': {
             borderRadius: "28.75px",
-            padding:"10px 30px",
-            backgroundColor:"#263238",
-            textDecoration:"none",
-            color:"white",
-            display:'flex',
-            alignItems:"center"
+            padding: "10px 30px",
+            backgroundColor: "#263238",
+            textDecoration: "none",
+            color: "white",
+            display: 'flex',
+            alignItems: "center"
         }
     },
-    
+
 
 }, {
     name: 'Home'
 })
 
-function Movies({ setObj, path, title }) {
+function Movies({ path, title }) {
     const [searchParams, setSearchParams] = useSearchParams()
     const [data, setData] = useState();
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle()
-    console.log(data)
 
     function getMovies(page) {
         fetch(`${path}${page}`)
@@ -122,11 +121,7 @@ function Movies({ setObj, path, title }) {
                 <Card className={cardStyle.cardMainStyle}>
                     <Link
                         className={cardStyle.link}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setObj(data)
-                        }}
-                        to={`/film_About/${index}`}
+                        to={`/film_About/${movie.id}`}
                     >
                         <MoviesCard movie={movie} />
                     </Link>
@@ -150,10 +145,10 @@ function Movies({ setObj, path, title }) {
             </Grid>
             <div className={cardStyle.paginationDIV}>
                 <div>
-                    {(page > 1) && <Link onClick={() => { setPage(+page - 1) }} to={`?page=${+page - 1}`}><ArrowBackIcon/> {` Page ${+page - 1}`}</Link>}
+                    {(page > 1) && <Link onClick={() => { setPage(+page - 1) }} to={`?page=${+page - 1}`}><ArrowBackIcon /> {` Page ${+page - 1}`}</Link>}
                 </div>
                 <div>
-                    <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon/></Link>
+                    <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon /></Link>
                 </div>
             </div>
         </div>
