@@ -6,7 +6,7 @@ const useStyle = makeStyles({
         width: '9%',
         position: 'fixed',
         left: '50%',
-        top: '50%',
+        top: '41%',
         marginLeft: '-4.5%',
     },
 }, {
