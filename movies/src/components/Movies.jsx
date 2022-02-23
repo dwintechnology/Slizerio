@@ -8,7 +8,7 @@ import Search from "./Search";
 import { useSearchParams } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import gif from '../gif.gif';
+import Loading from "./Loading";
 
 const useStyle = makeStyles({
     cardStyle: {
@@ -95,22 +95,17 @@ const useStyle = makeStyles({
             alignItems: "center"
         }
     },
-    gif: {
-        width: '100%',
-        height: 'auto',
-        padding: '19% 41% 0% 47%',
-    },
 }, {
     name: 'Home'
 })
 
-function Movies({ setObj, path, title, search = true , setSearchPath}) {
+function Movies({ setObj, path, title, search = true , setSearchParam}) {
     const [searchParams, setSearchParams] = useSearchParams()
     const [data, setData] = useState({});
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
     const cardStyle = useStyle();
     let navigate = useNavigate();
-console.log(data)
+
     function getMovies(page) {
         try {
             fetch(`${path}${page}`)
@@ -124,7 +119,6 @@ console.log(data)
         } catch (error) {
             console.log(error)
         }
-
     }
     useEffect(() => {
         getMovies(page)
@@ -153,13 +147,13 @@ console.log(data)
     })
     return (
         <>
-            {Object.keys(data).length == 0 ? <img className={cardStyle.gif} src={gif} alt="loading ..." />
+            {Object.keys(data).length == 0 ? <Loading/>
                 : <div>
                     <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
                         {search &&
                             <Grid item xs={12}>
                                 <div className={cardStyle.searchWrapper}>
-                                    <Search setSearchPath={setSearchPath}/>
+                                    <Search setSearchParam={setSearchParam}/>
                                 </div>
                                 <div>
                                     <h1 className={cardStyle.title}>{title}</h1>

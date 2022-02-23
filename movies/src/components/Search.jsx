@@ -1,12 +1,13 @@
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 
-function Search({ setSearchPath }) {
-    let navigate = useNavigate();
+function Search({ setSearchParam }) {
+    const navigate = useNavigate();
+
     return (
         <form action="submit" onSubmit={(e)=>{
             e.preventDefault()
-            setSearchPath(e.target[0].value)
+            setSearchParam(e.target[0].value)
             return navigate(`/search/${e.target[0].value}`);
         }}>
             <TextField

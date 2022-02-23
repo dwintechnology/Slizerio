@@ -11,6 +11,7 @@ import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import AlbumIcon from '@mui/icons-material/Album';
 import { makeStyles } from '@mui/styles';
+
 const drawerWidth = 240;
 const style = makeStyles({
   hovers: {
