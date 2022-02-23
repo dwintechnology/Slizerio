@@ -108,9 +108,9 @@ function Movies({ setObj, path, title, search = true , setSearchPath}) {
     const [searchParams, setSearchParams] = useSearchParams()
     const [data, setData] = useState({});
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
-    const cardStyle = useStyle()
+    const cardStyle = useStyle();
     let navigate = useNavigate();
-
+console.log(data)
     function getMovies(page) {
         try {
             fetch(`${path}${page}`)
@@ -174,7 +174,7 @@ function Movies({ setObj, path, title, search = true , setSearchPath}) {
                             {(page > 1) && <Link onClick={() => { setPage(+page - 1) }} to={`?page=${+page - 1}`}><ArrowBackIcon /> {` Page ${+page - 1}`}</Link>}
                         </div>
                         <div>
-                            <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon /></Link>
+                            {(data.total_pages > page) && <Link onClick={() => { setPage(+page + 1) }} to={`?page=${+page + 1}`}>{`Page ${+page + 1} `} <ArrowForwardIcon /></Link>}
                         </div>
                     </div>
                 </div>
