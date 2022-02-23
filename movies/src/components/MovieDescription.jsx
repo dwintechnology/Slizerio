@@ -132,7 +132,7 @@ function MovieDescription() {
     const [obj, setMovie] = useState()
 
     function getMovie() {
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=e366d974f73ae203397850eadc7bce1f`)
+        fetch(`${constants.API_PATH}/movie/${id}?api_key=${constants.API_KEY}`)
             .then((a) => { return a.json() })
             .then((b) => { setMovie(b) })
     }

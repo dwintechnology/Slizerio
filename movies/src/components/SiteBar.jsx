@@ -56,7 +56,7 @@ const style = makeStyles({
             }
           }
 })
-export default function SiteBar({setTitle}) {
+export default function SiteBar() {
   let [active, setActive] = React.useState(false)
   const styles = style()
     return (
@@ -89,10 +89,7 @@ export default function SiteBar({setTitle}) {
             </div>
             <h5>DISCOVER</h5>
               {['Popular', 'Top Rated', 'Upcoming'].map((text, index) => (
-                <Link   key={index} to={`/${text}`} onClick={(e)=>{
-                  setTitle(text)
-                 
-                }}>
+                <Link   key={index} to={`/${text}`}>
                 <ListItem  button className={styles.hovers }   >
                   <ListItemIcon>
                   {index % 3 === 0 ?  <FavoriteIcon/> :index % 2 !== 0 ? <AirlineStopsIcon/> : <UpcomingIcon/>}

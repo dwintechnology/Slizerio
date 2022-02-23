@@ -19,7 +19,7 @@ export default function Slider({ id }) {
   let [castobj, setCastObj] = useState()
 
   function getDATA() {
-    fetch(`${constants.API_PATH}/movie/${id}/credits?api_key=${constants.API_KEYS}`)
+    fetch(`${constants.API_PATH}/movie/${id}/credits?api_key=${constants.API_KEY}`)
       .then((first) => { return first.json() })
       .then((last) => { setCastObj(last) })
   }
