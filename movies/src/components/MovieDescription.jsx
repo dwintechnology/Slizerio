@@ -12,7 +12,6 @@ import Slider from './Slider';
 import { useEffect, useState } from "react";
 import Loading from './Loading';
 import YouTube from 'react-youtube';
-import { Modal } from '@mui/material';
 const style = makeStyles({
     parent: {
         display: "flex",

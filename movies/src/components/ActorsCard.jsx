@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
+import person from '../assets/person.svg'
 const style = makeStyles({
     parent: {
         display: "flex",
@@ -75,7 +75,7 @@ export default function ActorsCard() {
         <>
             <div className={actorsStyle.parent}>
                 <div>
-                    <img className={actorsStyle.parentImg} src={actor?.profile_path === null ? 'https://movies.fidalgo.dev/static/media/person.fdbc4613.svg' : constants.BIG_IMG_PATH + actor.profile_path} />
+                    <img className={actorsStyle.parentImg} src={actor?.profile_path === null ? person : constants.BIG_IMG_PATH + actor.profile_path} />
                 </div>
                 <div>
                     <h1 className={actorsStyle.actoresName}>{actor.name}</h1>

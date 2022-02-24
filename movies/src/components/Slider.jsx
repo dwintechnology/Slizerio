@@ -2,10 +2,7 @@ import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import constants from "../utils/constants";
-
-
-
-
+import person from '../assets/person.svg'
 
 const style = makeStyles({
   actorsIMG: {
@@ -46,7 +43,7 @@ export default function Slider({ id }) {
 
               <img onClick={() => {
                 nav(`/Person/${e.id}`)
-              }} className={SlideStyle.actorsIMG} src={e.profile_path === null ? 'https://movies.fidalgo.dev/static/media/person.fdbc4613.svg' : constants.SMALL_IMG_PATH + e.profile_path} />
+              }} className={SlideStyle.actorsIMG} src={e.profile_path === null ? person : constants.SMALL_IMG_PATH + e.profile_path} />
 
             </div>
 
@@ -55,7 +52,7 @@ export default function Slider({ id }) {
         })
 
       }
-      
+
     </div>
 
   )
