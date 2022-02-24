@@ -1,5 +1,6 @@
 import { makeStyles } from '@mui/styles';
 import { Link } from "react-router-dom";
+import error from '../assets/error.svg'
 
 const style = makeStyles({
     wrapper: {
@@ -33,7 +34,7 @@ function NonExistentPage({setPage}) {
     return (
         <div className={NonExistentPageStyle.wrapper}>
             <h1>Something went wrong!</h1>
-            <img src="https://movies.fidalgo.dev/static/media/error.cbc8724a.svg" alt="not found" />
+            <img src={error} alt="not found" />
             <Link onClick={()=>{setPage(1)}} to='/Popular'><button>HOME</button></Link>
         </div>
     )

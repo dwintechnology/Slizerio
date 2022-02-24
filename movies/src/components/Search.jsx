@@ -1,18 +1,14 @@
-import constants from "../utils/constants";
 import TextField from '@mui/material/TextField';
+import { useNavigate } from "react-router-dom";
 
-function Search({ setData }) {
-    
-    function SearchMovies(searchQuery) {
-        fetch(`${constants.API_PATH}/search/movie?api_key=${constants.API_KEY}&query=${searchQuery}`)
-            .then((a) => { return a.json() })
-            .then((b) => { setData(b) })
-    }
+function Search({ setSearchParam }) {
+    const navigate = useNavigate();
 
     return (
         <form action="submit" onSubmit={(e)=>{
             e.preventDefault()
-            SearchMovies(e.target[0].value)
+            setSearchParam(e.target[0].value)
+            return navigate(`/search/${e.target[0].value}`);
         }}>
             <TextField
                 id="filled-search"

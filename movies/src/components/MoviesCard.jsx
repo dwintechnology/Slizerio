@@ -4,6 +4,7 @@ import constants from "../utils/constants";
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
+import nothingPhoto from '../assets/nothingPhoto.svg'
 
 const useStyle = makeStyles({
     cardImageStyle: {
@@ -53,7 +54,7 @@ function MoviesCard({ movie }) {
             <CardMedia
                 className={movie.poster_path == null ? `${cardStyle.cardNotFoundImageStyle}` : `${cardStyle.cardImageStyle}`}
                 component="img"
-                image={movie.poster_path == null ? 'https://movies.fidalgo.dev/static/media/nothing.4c58037b.svg' : `${constants.SMALL_IMG_PATH}${movie.poster_path}`}
+                image={movie.poster_path == null ? nothingPhoto: `${constants.SMALL_IMG_PATH}${movie.poster_path}`}
                 alt="Paella dish"
             />
             <CardContent className={cardStyle.cardContent}>
