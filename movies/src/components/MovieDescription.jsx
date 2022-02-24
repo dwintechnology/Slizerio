@@ -121,15 +121,18 @@ const style = makeStyles({
             width: "516px"
         }
     },
-    trillerDiv:{
-        marginTop: "50px",
-        position:"fixed",
-        top:"50px",  
-        display:"flex" 
+    trillerDiv: {
+        marginTop: "-183px",
+        position: "fixed",
+        top: "50%",
+        display: "flex",
+        left: "50%",
+        marginLeft: "-330px"
     },
-    trillerTitle:{
-        color:"black",
-        cursor:"pointer"
+    trillerTitle: {
+        color: "black",
+        cursor: "pointer",
+        marginTop:"-35px"
     },
     "@media only screen and (max-width: 540px)": {
         bigDIV2: {
@@ -202,11 +205,13 @@ function MovieDescription() {
                                 IMBD
                                 <LocalMoviesIcon />
                             </Button>
-                            <Button onClick={()=>{setBoolean(true)}} sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                            {triller?.videos.results[0]?.key !== undefined && 
+                            <Button onClick={() => { setBoolean(true) }} sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
                                 TRAILER
                                 <PlayArrowIcon />
 
                             </Button>
+                            }
                         </div>
                         <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
                             <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "white", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
@@ -218,12 +223,12 @@ function MovieDescription() {
                     </div>
                     {
                         boolean && <div className={descriptionStyle.trillerDiv}>
-                                <YouTube
-                            videoId={triller?.videos.results[0].key} />
-                            <h1 onClick={()=>{setBoolean(!boolean)}}  className={descriptionStyle.trillerTitle}>
+                            <YouTube
+                                videoId={triller?.videos.results[0].key} />
+                            <h1 onClick={() => { setBoolean(!boolean) }} className={descriptionStyle.trillerTitle}>
                                 X
                             </h1>
-                    </div>
+                        </div>
                     }
                 </div>
 
