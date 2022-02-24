@@ -9,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Loading from "./Loading";
+import { useLocation } from 'react-router-dom'
 
 const useStyle = makeStyles({
     cardStyle: {
@@ -100,6 +101,7 @@ const useStyle = makeStyles({
 })
 
 function Movies({ path, title, search = true , setSearchParam}) {
+    const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
     const [data, setData] = useState({});
     const [page, setPage] = useState(searchParams.get("page") === null ? 1 : searchParams.get("page"))
