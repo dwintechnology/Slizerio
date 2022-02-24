@@ -100,7 +100,7 @@ const useStyle = makeStyles({
     name: 'Home'
 })
 
-function Movies({ path, title, search = true , setSearchParam}) {
+function Movies({ path, title, search = true, setSearchParam }) {
     const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
     const [data, setData] = useState({});
@@ -146,20 +146,18 @@ function Movies({ path, title, search = true , setSearchParam}) {
     })
     return (
         <>
-            {Object.keys(data).length == 0 ? <Loading/>
+            {Object.keys(data).length == 0 ? <Loading />
                 : <div>
                     <Grid container columns={{ xs: 1, sm: 6, md: 12 }} columnSpacing={1} spacing={0}>
-                        {search &&
-                            <Grid item xs={12}>
-                                <div className={cardStyle.searchWrapper}>
-                                    <Search setSearchParam={setSearchParam}/>
-                                </div>
-                                <div>
-                                    <h1 className={cardStyle.title}>{title}</h1>
-                                    <p className={cardStyle.titleParagraph}>Movies</p>
-                                </div>
-                            </Grid>
-                        }
+                        <Grid item xs={12}>
+                            {search && <div className={cardStyle.searchWrapper}>
+                                <Search setSearchParam={setSearchParam} />
+                            </div>}
+                            <div>
+                                <h1 className={cardStyle.title}>{title}</h1>
+                                <p className={cardStyle.titleParagraph}>Movies</p>
+                            </div>
+                        </Grid>
                         {items}
                     </Grid>
                     <div className={cardStyle.paginationDIV}>
