@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import Slider from './Slider';
 import Genres from './Genres';
 import { useEffect, useState } from "react";
+import Loading from './Loading';
+import YouTube from 'react-youtube';
 import nothingPhoto from "../assets/nothingPhoto.svg"
 import RecommendationMovies from "./RecommendationMovies";
 import { useLocation } from 'react-router-dom'
@@ -106,7 +108,7 @@ const style = makeStyles({
         fontWeight: 700,
         color: "#384850"
     },
-    RecommendationMoviesWrapper:{
+    RecommendationMoviesWrapper: {
         marginTop: '100px',
     },
     "@media only screen and (max-width: 1000px)": {
@@ -126,6 +128,19 @@ const style = makeStyles({
             width: "516px"
         }
     },
+    trillerDiv: {
+        marginTop: "-183px",
+        position: "fixed",
+        top: "50%",
+        display: "flex",
+        left: "50%",
+        marginLeft: "-330px"
+    },
+    trillerTitle: {
+        color: "black",
+        cursor: "pointer",
+        marginTop: "-35px"
+    },
     "@media only screen and (max-width: 540px)": {
         bigDIV2: {
             width: "330px"
@@ -138,19 +153,27 @@ function MovieDescription() {
     const navigate = useNavigate();
     let { id } = useParams();
     const [obj, setMovie] = useState()
-
+    const [triller, setTriller] = useState()
+    const [showVideo, setShowVideo] = useState(false)
     function getMovie() {
         fetch(`${constants.API_PATH}/movie/${id}?api_key=${constants.API_KEY}`)
             .then((a) => { return a.json() })
             .then((b) => { setMovie(b) })
     }
+    function getVideos() {
+        fetch(`${constants.API_PATH}/movie/${id}?api_key=${constants.API_KEY}&append_to_response=videos`)
+            .then((a) => { return a.json() })
+            .then((b) => { setTriller(b) })
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0)
         getMovie()
+        getVideos()
     }, [location.pathname])
 
-    if (!obj) {
-        return 'Loading'
+    if (!obj && !triller) {
+        return <Loading />
     }
     return (
         <>
@@ -181,32 +204,44 @@ function MovieDescription() {
                             THE CAST
                         </h2>
                         <div>
-                            <Slider id={obj.id} />
+                            <Slider id={obj.id}/>
                         </div>
-                        <div className={descriptionStyle.buttonsDIV}>
-                            <div>
-                                <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
-                                    Website
-                                    < LinkIcon />
-                                </Button>
-                                <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
-                                    IMBD
-                                    <LocalMoviesIcon />
-                                </Button>
-                                <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                        <div>
+                            <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                                Website
+                                < LinkIcon />
+                            </Button>
+                            <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                                IMBD
+                                <LocalMoviesIcon />
+                            </Button>
+                            {triller?.videos.results[0]?.key !== undefined &&
+                                <Button onClick={() => { setShowVideo(true) }} sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
                                     TRAILER
                                     <PlayArrowIcon />
+
                                 </Button>
-                            </div>
-                            <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
-                                <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
-                                    <ArrowBackIcon />
-                                    Back
-                                </Link>
-                            </Button>
+                            }
                         </div>
+                        <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
+                            <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "white", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
+                                <ArrowBackIcon />
+                                Back
+                            </Button>
+                        </Link>
+
                     </div>
+                    {
+                        showVideo && <div className={descriptionStyle.trillerDiv}>
+                            <YouTube
+                                videoId={triller?.videos.results[0].key} />
+                            <h1 onClick={() => { setShowVideo(!showVideo) }} className={descriptionStyle.trillerTitle}>
+                                X
+                            </h1>
+                        </div>
+                    }
                 </div>
+
             </div>
             <div className={descriptionStyle.RecommendationMoviesWrapper}>
                 <RecommendationMovies moviesId={obj.id} />
