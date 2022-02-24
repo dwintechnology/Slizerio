@@ -1,8 +1,12 @@
 import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import constants from "../utils/constants";
+
+
+
+
+
 const style = makeStyles({
   actorsIMG: {
     borderRadius: "50%",
@@ -11,6 +15,9 @@ const style = makeStyles({
     objectFit: "cover",
     padding: "5px",
     cursor: 'pointer'
+  },
+  actorsDIV: {
+    display: "flex"
   }
 })
 export default function Slider({ id }) {
@@ -29,19 +36,27 @@ export default function Slider({ id }) {
   }, [])
 
   return (
-    <div>
+
+    <div className={SlideStyle.actorsDIV}>
       {
         castobj?.cast?.map((e, index) => {
+          castobj.cast.length = 8
           return (
             <div key={e.id}>
+
               <img onClick={() => {
                 nav(`/Person/${e.id}`)
               }} className={SlideStyle.actorsIMG} src={e.profile_path === null ? 'https://movies.fidalgo.dev/static/media/person.fdbc4613.svg' : constants.SMALL_IMG_PATH + e.profile_path} />
 
             </div>
+
+
           )
         })
+
       }
+      
     </div>
+
   )
 }

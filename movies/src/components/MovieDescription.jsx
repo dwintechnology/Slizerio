@@ -10,7 +10,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import Slider from './Slider';
 import { useEffect, useState } from "react";
-
+import Loading from './Loading';
+import YouTube from 'react-youtube';
+import { Modal } from '@mui/material';
 const style = makeStyles({
     parent: {
         display: "flex",
@@ -119,6 +121,16 @@ const style = makeStyles({
             width: "516px"
         }
     },
+    trillerDiv:{
+        marginTop: "50px",
+        position:"fixed",
+        top:"50px",  
+        display:"flex" 
+    },
+    trillerTitle:{
+        color:"black",
+        cursor:"pointer"
+    },
     "@media only screen and (max-width: 540px)": {
         bigDIV2: {
             width: "330px"
@@ -130,19 +142,26 @@ function MovieDescription() {
     const navigate = useNavigate();
     let { id } = useParams();
     const [obj, setMovie] = useState()
-
+    const [triller, setTriller] = useState()
+    const [boolean, setBoolean] = useState(false)
     function getMovie() {
         fetch(`${constants.API_PATH}/movie/${id}?api_key=${constants.API_KEY}`)
             .then((a) => { return a.json() })
             .then((b) => { setMovie(b) })
     }
+    function getVideos() {
+        fetch(`${constants.API_PATH}/movie/${id}?api_key=${constants.API_KEY}&append_to_response=videos`)
+            .then((a) => { return a.json() })
+            .then((b) => { setTriller(b) })
+    }
 
     useEffect(() => {
         getMovie()
+        getVideos()
     }, [])
 
-    if (!obj) {
-        return 'Loading'
+    if (!obj && !triller) {
+        return <Loading />
     }
     return (
         <div className={descriptionStyle.parent}>
@@ -183,20 +202,33 @@ function MovieDescription() {
                                 IMBD
                                 <LocalMoviesIcon />
                             </Button>
-                            <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                            <Button onClick={()=>{setBoolean(true)}} sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
                                 TRAILER
                                 <PlayArrowIcon />
+
                             </Button>
                         </div>
-                        <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
-                            <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
+                        <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
+                            <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "white", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
                                 <ArrowBackIcon />
                                 Back
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
+
                     </div>
+                    {
+                        boolean && <div className={descriptionStyle.trillerDiv}>
+                                <YouTube
+                            videoId={triller?.videos.results[0].key} />
+                            <h1 onClick={()=>{setBoolean(!boolean)}}  className={descriptionStyle.trillerTitle}>
+                                X
+                            </h1>
+                    </div>
+                    }
                 </div>
+
             </div>
+
         </div>
     )
 }
