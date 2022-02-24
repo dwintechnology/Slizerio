@@ -40,7 +40,7 @@ function Genres({ genres }) {
         <div className={genersStyle.generes}>
             {genres.map((gener) => {
                 return (
-                    <div className={genersStyle.generesWrapper}>
+                    <div key={gener} className={genersStyle.generesWrapper}>
                         <Link to={`/${gener.name}`} className={genersStyle.link} >
                             <AlbumIcon className={genersStyle.icons} />
                             <p key={gener.name}>
