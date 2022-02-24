@@ -5,7 +5,7 @@ function Search({ setSearchParam }) {
     const navigate = useNavigate();
 
     return (
-        <form action="submit" onSubmit={(e)=>{
+        <form action="submit" onSubmit={(e) => {
             e.preventDefault()
             setSearchParam(e.target[0].value)
             return navigate(`/search/${e.target[0].value}`);

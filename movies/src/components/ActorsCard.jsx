@@ -8,6 +8,7 @@ import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import person from '../assets/person.svg'
+
 const style = makeStyles({
     parent: {
         display: "flex",
@@ -84,7 +85,7 @@ export default function ActorsCard() {
                     <p className={actorsStyle.bioText}>
                         {actor?.biography}
                     </p>
-                    <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex", justifyContent:"end", marginRight:"75px" }}>
+                    <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex", justifyContent: "end", marginRight: "75px" }}>
                         <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "white", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
                             <ArrowBackIcon />
                             Back

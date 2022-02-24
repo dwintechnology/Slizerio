@@ -122,6 +122,7 @@ function Movies({ path, title, search = true, setSearchParam }) {
             console.log(error)
         }
     }
+
     useEffect(() => {
         getMovies(page)
     }, [path, page])

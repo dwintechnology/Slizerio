@@ -204,7 +204,7 @@ function MovieDescription() {
                             THE CAST
                         </h2>
                         <div>
-                            <Slider id={obj.id}/>
+                            <Slider id={obj.id} />
                         </div>
                         <div>
                             <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">

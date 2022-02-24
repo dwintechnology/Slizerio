@@ -13,12 +13,11 @@ const useStyle = makeStyles({
     name: 'Loading'
 })
 
-export default function Loading(){
+export default function Loading() {
     const LoadingStyle = useStyle()
     return (
-
         <>
-        <img className={LoadingStyle.gif} src={load} alt="loading ..." />
+            <img className={LoadingStyle.gif} src={load} alt="loading ..." />
         </>
     )
 }
