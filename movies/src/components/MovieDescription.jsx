@@ -11,6 +11,9 @@ import { useNavigate } from 'react-router-dom';
 import Slider from './Slider';
 import Genres from './Genres';
 import { useEffect, useState } from "react";
+import nothingPhoto from "../assets/nothingPhoto.svg"
+import RecommendationMovies from "./RecommendationMovies";
+import { useLocation } from 'react-router-dom'
 
 const style = makeStyles({
     parent: {
@@ -103,6 +106,9 @@ const style = makeStyles({
         fontWeight: 700,
         color: "#384850"
     },
+    RecommendationMoviesWrapper:{
+        marginTop: '100px',
+    },
     "@media only screen and (max-width: 1000px)": {
         bigdiv: {
             display: "block",
@@ -127,6 +133,7 @@ const style = makeStyles({
     }
 })
 function MovieDescription() {
+    const location = useLocation()
     const descriptionStyle = style()
     const navigate = useNavigate();
     let { id } = useParams();
@@ -137,69 +144,74 @@ function MovieDescription() {
             .then((a) => { return a.json() })
             .then((b) => { setMovie(b) })
     }
-
     useEffect(() => {
+        window.scrollTo(0, 0)
         getMovie()
-    }, [])
+    }, [location.pathname])
 
     if (!obj) {
         return 'Loading'
     }
     return (
-        <div className={descriptionStyle.parent}>
-            <div className={descriptionStyle.bigdiv}>
-                <div className={descriptionStyle.divIMGCENTER}>
-                    <img className={obj.poster_path == null ? descriptionStyle.moviesNotFoundImg : descriptionStyle.moviesImg} src={`${constants.BIG_IMG_PATH}${obj.poster_path}`} />
-                </div>
-                <div className={descriptionStyle.bigDIV2}>
-                    <h2 className={descriptionStyle.movieTITLE}>{obj.title}</h2>
-                    <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
-                    <div className={descriptionStyle.section1}>
-                        <div className={descriptionStyle.starsDIV}>
-                            <Rating sx={{ marginRight: "5px", color: "black" }} name="simple-controlled" precision={0.5} value={(obj.vote_average * 5) / 9} readOnly />
-                            <span> {obj.vote_average} </span>
+        <>
+            <div className={descriptionStyle.parent}>
+                <div className={descriptionStyle.bigdiv}>
+                    <div className={descriptionStyle.divIMGCENTER}>
+                        <img className={obj.poster_path == null ? descriptionStyle.moviesNotFoundImg : descriptionStyle.moviesImg} src={obj.poster_path == null ? nothingPhoto : `${constants.BIG_IMG_PATH}${obj.poster_path}`} />
+                    </div>
+                    <div className={descriptionStyle.bigDIV2}>
+                        <h2 className={descriptionStyle.movieTITLE}>{obj.title}</h2>
+                        <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
+                        <div className={descriptionStyle.section1}>
+                            <div className={descriptionStyle.starsDIV}>
+                                <Rating sx={{ marginRight: "5px", color: "black" }} name="simple-controlled" precision={0.5} value={(obj.vote_average * 5) / 9} readOnly />
+                                <span> {obj.vote_average} </span>
+                            </div>
+                            <h2 className={descriptionStyle.section1Language}><span>{obj.original_language}</span>/<span>{obj.release_date}</span></h2>
                         </div>
-                        <h2 className={descriptionStyle.section1Language}><span>{obj.original_language}</span>/<span>{obj.release_date}</span></h2>
-                    </div>
-                    <h2 className={descriptionStyle.genresTITLE}>THE GENRES</h2>
-                    <Genres genres={obj.genres} />
-                    <h3 className={descriptionStyle.genresTITLE}>
-                        THE SYNOPSIS
-                    </h3>
-                    <p className={descriptionStyle.parentPARAGRAPH}>
-                        {obj.overview}
-                    </p>
-                    <h2 className={descriptionStyle.genresTITLE}>
-                        THE CAST
-                    </h2>
-                    <div>
-                        <Slider id={obj.id} />
-                    </div>
-                    <div className={descriptionStyle.buttonsDIV}>
+                        <h2 className={descriptionStyle.genresTITLE}>THE GENRES</h2>
+                        <Genres genres={obj.genres} />
+                        <h3 className={descriptionStyle.genresTITLE}>
+                            THE SYNOPSIS
+                        </h3>
+                        <p className={descriptionStyle.parentPARAGRAPH}>
+                            {obj.overview}
+                        </p>
+                        <h2 className={descriptionStyle.genresTITLE}>
+                            THE CAST
+                        </h2>
                         <div>
-                            <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
-                                Website
-                                < LinkIcon />
-                            </Button>
-                            <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
-                                IMBD
-                                <LocalMoviesIcon />
-                            </Button>
-                            <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
-                                TRAILER
-                                <PlayArrowIcon />
+                            <Slider id={obj.id} />
+                        </div>
+                        <div className={descriptionStyle.buttonsDIV}>
+                            <div>
+                                <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                                    Website
+                                    < LinkIcon />
+                                </Button>
+                                <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                                    IMBD
+                                    <LocalMoviesIcon />
+                                </Button>
+                                <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
+                                    TRAILER
+                                    <PlayArrowIcon />
+                                </Button>
+                            </div>
+                            <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
+                                <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
+                                    <ArrowBackIcon />
+                                    Back
+                                </Link>
                             </Button>
                         </div>
-                        <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "black", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
-                            <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
-                                <ArrowBackIcon />
-                                Back
-                            </Link>
-                        </Button>
                     </div>
                 </div>
             </div>
-        </div>
+            <div className={descriptionStyle.RecommendationMoviesWrapper}>
+                <RecommendationMovies moviesId={obj.id} />
+            </div>
+        </>
     )
 }
 export default MovieDescription
