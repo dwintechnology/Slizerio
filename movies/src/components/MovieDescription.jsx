@@ -206,7 +206,7 @@ function MovieDescription() {
                         <div>
                             <Slider id={obj.id} />
                         </div>
-                        <div>
+                        <div className={descriptionStyle.buttonsDIV}>
                             <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
                                 Website
                                 < LinkIcon />
@@ -222,13 +222,14 @@ function MovieDescription() {
 
                                 </Button>
                             }
-                        </div>
-                        <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
+                             <Link onClick={() => navigate(-1)} sx={{ textDecoration: "none", color: "white", alignItems: "center", display: "flex" }}>
                             <Button sx={{ borderRadius: "50px", backgroundColor: "#253036", color: "white", marginLeft: "20px", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "82px", height: "30px" }} variant="contained" color="success">
                                 <ArrowBackIcon />
                                 Back
                             </Button>
                         </Link>
+                        </div>
+                       
 
                     </div>
                     {
