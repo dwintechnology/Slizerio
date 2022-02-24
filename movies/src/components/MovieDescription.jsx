@@ -9,6 +9,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import Slider from './Slider';
+import Genres from './Genres';
 import { useEffect, useState } from "react";
 
 const style = makeStyles({
@@ -62,7 +63,7 @@ const style = makeStyles({
         color: "#243036",
         fontWeight: 700,
         textTransform: "uppercase",
-        marginBottom: "40px",
+        marginBottom: "12px",
         fontSize: "11px"
     },
     parentICON: {
@@ -161,6 +162,7 @@ function MovieDescription() {
                         <h2 className={descriptionStyle.section1Language}><span>{obj.original_language}</span>/<span>{obj.release_date}</span></h2>
                     </div>
                     <h2 className={descriptionStyle.genresTITLE}>THE GENRES</h2>
+                    <Genres genres={obj.genres} />
                     <h3 className={descriptionStyle.genresTITLE}>
                         THE SYNOPSIS
                     </h3>
