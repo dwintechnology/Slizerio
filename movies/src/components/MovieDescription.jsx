@@ -106,6 +106,9 @@ const style = makeStyles({
         fontWeight: 700,
         color: "#384850"
     },
+    RecommendationMoviesWrapper:{
+        marginTop: '100px',
+    },
     "@media only screen and (max-width: 1000px)": {
         bigdiv: {
             display: "block",
@@ -205,7 +208,9 @@ function MovieDescription() {
                     </div>
                 </div>
             </div>
-            <RecommendationMovies moviesId={obj.id} />
+            <div className={descriptionStyle.RecommendationMoviesWrapper}>
+                <RecommendationMovies moviesId={obj.id} />
+            </div>
         </>
     )
 }
