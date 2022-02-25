@@ -10,36 +10,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import AlbumIcon from '@mui/icons-material/Album';
-import { makeStyles } from '@mui/styles';
+import style from '../styles/AppBar';
 
 const drawerWidth = 240;
-const style = makeStyles({
-  hovers: {
-    '&:hover': {
-      border: "1px solid white",
-      borderRadius: "2rem"
-    }
-  },
-  boxing: {
-    display: "flex",
-  },
-  NONE: {
-    display: "none"
-  },
-  titles: {
-    color: "white"
-  },
-  closes: {
-    display: "flex",
-    justifyContent: "end"
-  },
-  closesBtn: {
-    backgroundColor: "transparent",
-    border: "none",
-    color: "white",
-    fontSize: "15px"
-  }
-})
+
 
 export default function Appbar({ setActive, active }) {
   const styles = style()

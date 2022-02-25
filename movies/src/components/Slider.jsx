@@ -1,22 +1,9 @@
-import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import constants from "../utils/constants";
 import person from '../assets/person.svg'
+import style from "../styles/Slider";
 
-const style = makeStyles({
-  actorsIMG: {
-    borderRadius: "50%",
-    width: "50px",
-    height: "50px",
-    objectFit: "cover",
-    padding: "5px",
-    cursor: 'pointer'
-  },
-  actorsDIV: {
-    display: "flex"
-  }
-})
 export default function Slider({ id }) {
   const SlideStyle = style()
   const nav = useNavigate()

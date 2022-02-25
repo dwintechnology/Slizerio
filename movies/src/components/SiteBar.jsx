@@ -11,52 +11,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import AlbumIcon from '@mui/icons-material/Album';
-import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import Appbar from './AppBar';
 import { Link } from "react-router-dom";
+import style from '../styles/SiteBar';
+
 const drawerWidth = 240;
 
-const style = makeStyles({
-  hovers: {
-    '&:hover': {
-      border: "1px solid #516a74",
-      borderRadius: "2rem"
-    },
-    '&:focus': {
-      border: "1px solid #516a74",
-      borderRadius: "2rem"
-    },
-  },
-  hoverss: {
-    '&:hover': {
-      border: "1px solid #516a74",
-      borderRadius: "2rem"
-    }
-  },
-  positionNone: {
-    '&::-webkit-scrollbar': {
-      display: "none"
-    },
-    padding: "20px"
-  },
-  AppbarStyle: {
-    display: "none"
-  },
-
-  "@media only screen and (max-width: 1000px)": {
-    AppbarStyle: {
-      display: "block"
-    },
-    mobileBox: {
-      display: "none"
-    },
-    appBtn: {
-      backgroundColor: "transparent",
-      border: "none"
-    }
-  }
-})
 export default function SiteBar() {
   let [active, setActive] = React.useState(false)
   const styles = style()
