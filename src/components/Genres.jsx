@@ -6,7 +6,7 @@ function Genres({ genres }) {
     const genersStyle = useStyle();
     return (
         <div className={genersStyle.generes}>
-            {genres.map((gener, index) => {
+            {genres?.map((gener, index) => {
                 return (
                     <div key={index} className={genersStyle.generesWrapper}>
                         <Link to={`/${gener.name}`} className={genersStyle.link} >
