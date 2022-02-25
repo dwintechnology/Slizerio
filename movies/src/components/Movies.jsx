@@ -107,6 +107,7 @@ function Movies({ path, title, search = true , setSearchParam}) {
     const navigate = useNavigate();
 
     function getMovies(page) {
+        setData({});
         try {
             fetch(`${path}${page}`)
                 .then((a) => { return a.json() })
