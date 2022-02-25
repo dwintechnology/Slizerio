@@ -24,7 +24,7 @@ const useStyle = makeStyles({
         borderRadius: '0.8rem',
         boxShadow: '0px 0px 20px 0px #000000',
         backgroundColor: 'transparent',
-    },   
+    },
     cardContent: {
         '&.MuiCardContent-root': {
             width: 180,
@@ -54,7 +54,7 @@ function MoviesCard({ movie }) {
             <CardMedia
                 className={movie.poster_path == null ? `${cardStyle.cardNotFoundImageStyle}` : `${cardStyle.cardImageStyle}`}
                 component="img"
-                image={movie.poster_path == null ? nothingPhoto: `${constants.SMALL_IMG_PATH}${movie.poster_path}`}
+                image={movie.poster_path == null ? nothingPhoto : `${constants.SMALL_IMG_PATH}${movie.poster_path}`}
                 alt="Paella dish"
             />
             <CardContent className={cardStyle.cardContent}>

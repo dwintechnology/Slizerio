@@ -16,108 +16,109 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Appbar from './AppBar';
 import { Link } from "react-router-dom";
 const drawerWidth = 240;
+
 const style = makeStyles({
-        hovers:{
-            '&:hover':{
-                border:"1px solid #516a74",
-                borderRadius: "2rem"
-            },
-            '&:focus':{
-              border:"1px solid #516a74",
-              borderRadius: "2rem"
-          },
-        },
-        hoverss:{
-          '&:hover':{
-              border:"1px solid #516a74",
-              borderRadius: "2rem"
-          }
-        },
-        positionNone:{
-            '&::-webkit-scrollbar':{
-              display:"none"
-            },
-            padding:"20px"
-          },
-          AppbarStyle:{
-            display:"none"
-          },
-          
-          "@media only screen and (max-width: 1000px)":{
-            AppbarStyle:{
-              display:"block"
-            },
-            mobileBox:{
-              display:"none"
-            },
-            appBtn:{
-              backgroundColor:"transparent",
-              border:"none"
-            }
-          }
+  hovers: {
+    '&:hover': {
+      border: "1px solid #516a74",
+      borderRadius: "2rem"
+    },
+    '&:focus': {
+      border: "1px solid #516a74",
+      borderRadius: "2rem"
+    },
+  },
+  hoverss: {
+    '&:hover': {
+      border: "1px solid #516a74",
+      borderRadius: "2rem"
+    }
+  },
+  positionNone: {
+    '&::-webkit-scrollbar': {
+      display: "none"
+    },
+    padding: "20px"
+  },
+  AppbarStyle: {
+    display: "none"
+  },
+
+  "@media only screen and (max-width: 1000px)": {
+    AppbarStyle: {
+      display: "block"
+    },
+    mobileBox: {
+      display: "none"
+    },
+    appBtn: {
+      backgroundColor: "transparent",
+      border: "none"
+    }
+  }
 })
 export default function SiteBar() {
   let [active, setActive] = React.useState(false)
   const styles = style()
-    return (
-      <>
-      <AppBar className={styles.AppbarStyle} position="fixed" sx={{ zIndex: "auto", backgroundColor:"#b0bec5"}}>
+  return (
+    <>
+      <AppBar className={styles.AppbarStyle} position="fixed" sx={{ zIndex: "auto", backgroundColor: "#b0bec5" }}>
         <button className={styles.appBtn} onClick={
-          ()=>{
+          () => {
             setActive(true)
           }
-         
-        }><MenuIcon/></button>
-        
-        </AppBar>
-        {(active) && <Appbar setActive={setActive} active={active}/> }
-        <Box className={styles.mobileBox} sx={{ display: 'flex'}}>
+
+        }><MenuIcon /></button>
+
+      </AppBar>
+      {(active) && <Appbar setActive={setActive} active={active} />}
+      <Box className={styles.mobileBox} sx={{ display: 'flex' }}>
         <CssBaseline />
         <Drawer
           variant="permanent"
           sx={{
             width: drawerWidth,
             flexShrink: 0,
-            
-            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', position:"unset"},
+
+            [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', position: "unset" },
           }}
         >
-          <Box className={styles.positionNone} sx={{ overflow: 'auto'}}>
+          <Box className={styles.positionNone} sx={{ overflow: 'auto' }}>
             <List  >
-            <div style={{display:"flex", justifyContent:"center"}}>
-            <img style={{width:"100px", height:"100px"}} src="	https://movies.fidalgo.dev/static/media/logo.bcc287ea.svg"/>
-            </div>
-            <h5>DISCOVER</h5>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Link to='/'><img style={{ width: "100px", height: "100px" }} src="https://movies.fidalgo.dev/static/media/logo.bcc287ea.svg" /></Link>
+              </div>
+              <h5>DISCOVER</h5>
               {['Popular', 'Top Rated', 'Upcoming'].map((text, index) => (
-                <Link   key={index} to={`/${text}`}>
-                <ListItem  button className={styles.hovers }   >
-                  <ListItemIcon>
-                  {index % 3 === 0 ?  <FavoriteIcon/> :index % 2 !== 0 ? <AirlineStopsIcon/> : <UpcomingIcon/>}
-                    
-                  </ListItemIcon>
-                  
-                  <ListItemText   sx={{color:"#516a74"}} primary={text} />
-                    
-                </ListItem>
+                <Link key={index} to={`/${text}`}>
+                  <ListItem button className={styles.hovers}   >
+                    <ListItemIcon>
+                      {index % 3 === 0 ? <FavoriteIcon /> : index % 2 !== 0 ? <AirlineStopsIcon /> : <UpcomingIcon />}
+
+                    </ListItemIcon>
+
+                    <ListItemText sx={{ color: "#516a74" }} primary={text} />
+
+                  </ListItem>
                 </Link>
               ))}
             </List>
             <List>
-            <h5>GENRES</h5>
+              <h5>GENRES</h5>
               {['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'].map((text, index) => (
-               <Link   key={index} to={`/${text}`} >
-               <ListItem button className={styles.hovers}  sx={{color:"#516a74" , fontSize: "1.2rem", fontWeight: 600, lineHeight: 1}} key={text}>
-                  <ListItemIcon>
-                    <AlbumIcon/>
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
+                <Link key={index} to={`/${text}`} >
+                  <ListItem button className={styles.hovers} sx={{ color: "#516a74", fontSize: "1.2rem", fontWeight: 600, lineHeight: 1 }} key={text}>
+                    <ListItemIcon>
+                      <AlbumIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
                 </Link>
               ))}
             </List>
           </Box>
         </Drawer>
       </Box>
-      </>
-    );
-  }
+    </>
+  );
+}

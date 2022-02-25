@@ -38,9 +38,9 @@ function Genres({ genres }) {
     const genersStyle = useStyle();
     return (
         <div className={genersStyle.generes}>
-            {genres.map((gener) => {
+            {genres.map((gener, index) => {
                 return (
-                    <div className={genersStyle.generesWrapper}>
+                    <div key={index} className={genersStyle.generesWrapper}>
                         <Link to={`/${gener.name}`} className={genersStyle.link} >
                             <AlbumIcon className={genersStyle.icons} />
                             <p key={gener.name}>

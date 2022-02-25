@@ -40,6 +40,7 @@ const style = makeStyles({
     fontSize: "15px"
   }
 })
+
 export default function Appbar({ setActive, active }) {
   const styles = style()
   return (

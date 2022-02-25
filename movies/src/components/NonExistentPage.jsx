@@ -15,7 +15,7 @@ const style = makeStyles({
             height: '35vh',
             marginBottom: '6rem',
         },
-        '& h1':{
+        '& h1': {
             fontSize: '37px',
             fontWeight: '100',
             letterSpacing: '1px',
@@ -23,19 +23,19 @@ const style = makeStyles({
             marginBottom: '60px',
         },
     }
-},{
+}, {
     name: 'NonExistentPage'
 })
 
 
-function NonExistentPage({setPage}) {
+function NonExistentPage({ setPage }) {
     const NonExistentPageStyle = style();
 
     return (
         <div className={NonExistentPageStyle.wrapper}>
             <h1>Something went wrong!</h1>
             <img src={error} alt="not found" />
-            <Link onClick={()=>{setPage(1)}} to='/Popular'><button>HOME</button></Link>
+            <Link onClick={() => { setPage(1) }} to='/Popular'><button>HOME</button></Link>
         </div>
     )
 }
