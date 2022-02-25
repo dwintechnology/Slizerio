@@ -180,31 +180,31 @@ function MovieDescription() {
             <div className={descriptionStyle.parent}>
                 <div className={descriptionStyle.bigdiv}>
                     <div className={descriptionStyle.divIMGCENTER}>
-                        <img className={obj.poster_path == null ? descriptionStyle.moviesNotFoundImg : descriptionStyle.moviesImg} src={obj.poster_path == null ? nothingPhoto : `${constants.BIG_IMG_PATH}${obj.poster_path}`} />
+                        <img className={obj?.poster_path == null ? descriptionStyle.moviesNotFoundImg : descriptionStyle.moviesImg} src={obj?.poster_path == null ? nothingPhoto : `${constants.BIG_IMG_PATH}${obj?.poster_path}`} />
                     </div>
                     <div className={descriptionStyle.bigDIV2}>
-                        <h2 className={descriptionStyle.movieTITLE}>{obj.title}</h2>
+                        <h2 className={descriptionStyle.movieTITLE}>{obj?.title}</h2>
                         <h4 className={descriptionStyle.parentTitle}>THE MULTIVERSE UNLEASHED</h4>
                         <div className={descriptionStyle.section1}>
                             <div className={descriptionStyle.starsDIV}>
-                                <Rating sx={{ marginRight: "5px", color: "black" }} name="simple-controlled" precision={0.5} value={(obj.vote_average * 5) / 9} readOnly />
-                                <span> {obj.vote_average} </span>
+                                <Rating sx={{ marginRight: "5px", color: "black" }} name="simple-controlled" precision={0.5} value={(obj?.vote_average * 5) / 9} readOnly />
+                                <span> {obj?.vote_average} </span>
                             </div>
-                            <h2 className={descriptionStyle.section1Language}><span>{obj.original_language}</span>/<span>{obj.release_date}</span></h2>
+                            <h2 className={descriptionStyle.section1Language}><span>{obj?.original_language}</span>/<span>{obj?.release_date}</span></h2>
                         </div>
                         <h2 className={descriptionStyle.genresTITLE}>THE GENRES</h2>
-                        <Genres genres={obj.genres} />
+                        <Genres genres={obj?.genres} />
                         <h3 className={descriptionStyle.genresTITLE}>
                             THE SYNOPSIS
                         </h3>
                         <p className={descriptionStyle.parentPARAGRAPH}>
-                            {obj.overview}
+                            {obj?.overview}
                         </p>
                         <h2 className={descriptionStyle.genresTITLE}>
                             THE CAST
                         </h2>
                         <div>
-                            <Slider id={obj.id} />
+                            <Slider id={obj?.id} />
                         </div>
                         <div className={descriptionStyle.buttonsDIV}>
                             <Button sx={{ borderRadius: "50px", backgroundColor: "transparent", color: "black", border: "1px solid #242f34", fontSize: "8px", fontWeight: 400, width: "106px", height: "30px" }} variant="contained" color="success">
@@ -245,7 +245,7 @@ function MovieDescription() {
 
             </div>
             <div className={descriptionStyle.RecommendationMoviesWrapper}>
-                <RecommendationMovies moviesId={obj.id} />
+                <RecommendationMovies moviesId={obj?.id} />
             </div>
         </>
     )
